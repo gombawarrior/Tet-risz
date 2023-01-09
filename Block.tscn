@@ -1,0 +1,16 @@
+[gd_scene format=2]
+
+[node name="Block" type="ColorRect"]
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 0.117647, 0.101961, 0.101961, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
