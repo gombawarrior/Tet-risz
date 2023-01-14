@@ -1,23 +1,22 @@
 using Godot;
 using System.Linq;
-using System.Collections.Generic;
 
 public abstract class ShapeControl {
-    protected abstract List<List<int>> ShapeMatrix { get; }
+    protected abstract int[,] ShapeMatrix { get; }
     protected abstract Vector2 StartPos { get; }
     public abstract int Id { get; }
     public Vector2 pos;
-    public List<List<int>> currentShapeMatrix;
+    public int[,] currentShapeMatrix;
     public ShapeControl() {
         currentShapeMatrix = ShapeMatrix;
         pos = StartPos;
     }
     
-    public List<List<int>> Rotate() {
-        List<List<int>> newShapeMatrix = new List<List<int>>();
-        for (int row = 0; row < currentShapeMatrix[0].Count; row++) {
-            for (int col = 0; col < currentShapeMatrix.Count; col++) {
-                newShapeMatrix[row][col] = currentShapeMatrix[col][currentShapeMatrix[0].Count - row - 1];
+    public int[,] Rotate() {
+        int[,] newShapeMatrix = new int[currentShapeMatrix.GetLength(1), currentShapeMatrix.GetLength(0)];
+        for (int row = 0; row < newShapeMatrix.GetLength(1); row++) {
+            for (int col = 0; col < currentShapeMatrix.GetLength(0); col++) {
+                currentShapeMatrix[row, col] = currentShapeMatrix[col, currentShapeMatrix.GetLength(1) - row - 1];
             }
         }
         return newShapeMatrix;
