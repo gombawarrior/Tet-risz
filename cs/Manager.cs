@@ -14,10 +14,10 @@ public class Manager {
         grid = new Grid(22, 20);
     }
 
-    private bool IsLegal(int[,] shapeMatrix) {
-        for (int row = 0; row < shapeMatrix.GetLength(1); row++) {
-            for (int col = 0; col < shapeMatrix.GetLength(0); col++) {
-                if (shapeMatrix[row, col] == 1) {
+    private bool IsLegal() {
+        for (int row = 0; row < ActiveShape.currentShapeMatrix.GetLength(1); row++) {
+            for (int col = 0; col < ActiveShape.currentShapeMatrix.GetLength(0); col++) {
+                if (ActiveShape.currentShapeMatrix[row, col] == 1) {
                     if (!grid.IsEmpty((int)ActiveShape.pos.x + col, (int)ActiveShape.pos.y + row)) return false;
                 }
             }
@@ -26,9 +26,34 @@ public class Manager {
     }
 
     public void RotateShape() {
-        var newShape = ActiveShape.Rotate();
-        if (IsLegal(newShape)) {
-            ActiveShape.currentShapeMatrix = newShape;
+        ActiveShape.Rotate();
+        if (!IsLegal()) {
+            ActiveShape.RotateBack();
         }
+    }
+
+    public void MoveRight() {
+        ActiveShape.Move(0, 1);
+        if (!IsLegal()) {
+            ActiveShape.Move(0, -1);
+        }
+    }    
+
+    public void MoveLeft() {
+        ActiveShape.Move(0, -1);
+        if (!IsLegal()) {
+            ActiveShape.Move(0, 1);
+        }
+    }   
+
+    public void MoveDown() {
+        ActiveShape.Move(1, 0);
+        if (!IsLegal()) {
+            ActiveShape.Move(-1, 0);
+        }
+    }
+
+    private void PlaceBlocks() {
+
     }
 }

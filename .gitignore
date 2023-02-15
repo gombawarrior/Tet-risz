@@ -6,6 +6,9 @@
 .import/
 export.cfg
 export_presets.cfg
+GodotSharp
+Godot_v3.5.1-stable_mono_win64_console.cmd
+Godot_v3.5.1-stable_mono_win64.exe
 
 # Imported translations (automatically generated from CSV files)
 *.translation
