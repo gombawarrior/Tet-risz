@@ -15,8 +15,8 @@ public class Manager {
     }
 
     private bool IsLegal() {
-        for (int row = 0; row < ActiveShape.currentShapeMatrix.GetLength(1); row++) {
-            for (int col = 0; col < ActiveShape.currentShapeMatrix.GetLength(0); col++) {
+        for (int row = 0; row < ActiveShape.CurrentCols; row++) {
+            for (int col = 0; col < ActiveShape.CurrentRows; col++) {
                 if (ActiveShape.currentShapeMatrix[row, col] == 1) {
                     if (!grid.IsEmpty((int)ActiveShape.pos.x + col, (int)ActiveShape.pos.y + row)) return false;
                 }

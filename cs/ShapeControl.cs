@@ -7,26 +7,29 @@ public abstract class ShapeControl {
     public abstract int Id { get; }
     public Vector2 pos;
     public int[,] currentShapeMatrix;
+
+    public int CurrentRows => currentShapeMatrix.GetLength(0);
+    public int CurrentCols => currentShapeMatrix.GetLength(1);
     public ShapeControl() {
         currentShapeMatrix = ShapeMatrix;
         pos = StartPos;
     }
     
     public void Rotate() {
-        int[,] newShapeMatrix = new int[currentShapeMatrix.GetLength(1), currentShapeMatrix.GetLength(0)];
-        for (int row = 0; row < newShapeMatrix.GetLength(0); row++) {
-            for (int col = 0; col < currentShapeMatrix.GetLength(1); col++) {
-                newShapeMatrix[row, col] = currentShapeMatrix[currentShapeMatrix.GetLength(0) - col - 1, row];
+        int[,] newShapeMatrix = new int[CurrentCols, CurrentRows];
+        for (int row = 0; row < CurrentRows; row++) {
+            for (int col = 0; col < CurrentCols; col++) {
+                newShapeMatrix[row, col] = currentShapeMatrix[CurrentRows - col - 1, row];
             }
         }
         currentShapeMatrix = newShapeMatrix;
     }
 
     public void RotateBack() {
-        int[,] newShapeMatrix = new int[currentShapeMatrix.GetLength(1), currentShapeMatrix.GetLength(0)];
-        for (int row = 0; row < newShapeMatrix.GetLength(0); row++) {
-            for (int col = 0; col < currentShapeMatrix.GetLength(1); col++) {
-                newShapeMatrix[row, col] = currentShapeMatrix[col, currentShapeMatrix.GetLength(1) - row - 1];
+        int[,] newShapeMatrix = new int[CurrentCols, CurrentRows];
+        for (int row = 0; row < CurrentRows; row++) {
+            for (int col = 0; col < CurrentCols; col++) {
+                newShapeMatrix[row, col] = currentShapeMatrix[col, CurrentCols - row - 1];
             }
         }
         currentShapeMatrix = newShapeMatrix;
