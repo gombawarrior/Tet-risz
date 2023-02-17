@@ -4,6 +4,11 @@ public class Grid {
 	int Rows { get; }
 	int Columns { get; }
 	readonly int[,] grid;
+
+	public int this[int row, int col] {
+		get => grid[row, col];
+		set => grid[row, col] = value;
+	}
 	
 	public Grid(int rows, int cols) {
 		Rows = rows;

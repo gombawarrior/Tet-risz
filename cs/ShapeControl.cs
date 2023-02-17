@@ -7,7 +7,6 @@ public abstract class ShapeControl {
     public abstract int Id { get; }
     public Vector2 pos;
     public int[,] currentShapeMatrix;
-
     public int CurrentRows => currentShapeMatrix.GetLength(0);
     public int CurrentCols => currentShapeMatrix.GetLength(1);
     public ShapeControl() {

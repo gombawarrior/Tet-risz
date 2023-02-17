@@ -50,10 +50,17 @@ public class Manager {
         ActiveShape.Move(1, 0);
         if (!IsLegal()) {
             ActiveShape.Move(-1, 0);
+            PlaceBlocks();
         }
     }
 
     private void PlaceBlocks() {
-
+        for (int row = 0; row < ActiveShape.CurrentCols; row++) {
+            for (int col = 0; col < ActiveShape.CurrentRows; col++) {
+                if (ActiveShape.currentShapeMatrix[row, col] == 1) {
+                    grid[(int)ActiveShape.pos.x + row, (int)ActiveShape.pos.y + col] = ActiveShape.Id;
+                }
+            }
+        }
     }
 }
