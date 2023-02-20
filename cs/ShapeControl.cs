@@ -1,5 +1,4 @@
 using Godot;
-using System.Linq;
 
 public abstract class ShapeControl {
     protected abstract int[,] ShapeMatrix { get; }
