@@ -9,9 +9,12 @@ public class Manager {
         }
     }
     Grid grid;
+    Queue queue;
 
     public Manager() {
         grid = new Grid(22, 20);
+        queue = new Queue();
+        ActiveShape = queue.UpdateShape();
     }
 
     private bool IsLegal() {

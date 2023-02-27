@@ -12,4 +12,14 @@ public class Queue {
     };
     public ShapeControl NextShape { get; private set; }
     private ShapeControl RandomShape => Shapes[rand.Next(Shapes.Length)];
+
+    public Queue() {
+        NextShape = RandomShape;
+    }
+
+    public ShapeControl UpdateShape() {
+        ShapeControl shape = NextShape;
+        NextShape = RandomShape;
+        return shape;
+    }
 }
