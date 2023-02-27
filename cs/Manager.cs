@@ -65,5 +65,6 @@ public class Manager {
                 }
             }
         }
+        ActiveShape = queue.UpdateShape();
     }
 }
