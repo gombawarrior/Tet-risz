@@ -8,7 +8,8 @@ public class Queue {
         new LShape(),
         new OShape(),
         new SShape(),
-        new ZShape()
+        new ZShape(),
+        new TShape()
     };
     public ShapeControl NextShape { get; private set; }
     private ShapeControl RandomShape => Shapes[rand.Next(Shapes.Length)];
