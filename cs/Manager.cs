@@ -8,8 +8,9 @@ public class Manager {
             ActiveShape.Reset();
         }
     }
-    Grid grid;
-    Queue queue;
+    public Grid grid;
+    public Queue queue;
+    public int Score { get; private set; }
 
     public Manager() {
         grid = new Grid(22, 20);
@@ -65,6 +66,9 @@ public class Manager {
                 }
             }
         }
+
+        Score += grid.ClearFullRows();
+
         ActiveShape = queue.UpdateShape();
     }
 }

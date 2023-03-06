@@ -1,8 +1,8 @@
 using System.Linq;
 
 public class Grid {
-	int Rows { get; }
-	int Columns { get; }
+	public int Rows { get; }
+	public int Columns { get; }
 	readonly int[,] grid;
 
 	public int this[int row, int col] {
