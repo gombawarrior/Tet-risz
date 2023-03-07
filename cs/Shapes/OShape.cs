@@ -1,6 +1,6 @@
 using Godot;
 
-public class OShape : ShapeControl {
+public class OShape : Shape {
     protected override int[,] ShapeMatrix => new int[2, 2] {
         {1, 1},
         {1, 1}

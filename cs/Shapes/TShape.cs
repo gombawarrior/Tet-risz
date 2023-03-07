@@ -1,6 +1,6 @@
 using Godot;
 
-public class TShape : ShapeControl {
+public class TShape : Shape {
     protected override int[,] ShapeMatrix => new int[2, 3] {
         {0, 1, 0},
         {1, 1, 1}

@@ -2,7 +2,7 @@
 
 public class Queue {
     Random rand = new Random();
-    public ShapeControl[] Shapes = { 
+    public Shape[] Shapes = { 
         new IShape(),
         new JShape(),
         new LShape(),
@@ -11,15 +11,15 @@ public class Queue {
         new ZShape(),
         new TShape()
     };
-    public ShapeControl NextShape { get; private set; }
-    private ShapeControl RandomShape => Shapes[rand.Next(Shapes.Length)];
+    public Shape NextShape { get; private set; }
+    private Shape RandomShape => Shapes[rand.Next(Shapes.Length)];
 
     public Queue() {
         NextShape = RandomShape;
     }
 
-    public ShapeControl UpdateShape() {
-        ShapeControl shape = NextShape;
+    public Shape UpdateShape() {
+        Shape shape = NextShape;
         NextShape = RandomShape;
         return shape;
     }

@@ -1,6 +1,6 @@
 using Godot;
 
-public abstract class ShapeControl {
+public abstract class Shape {
     protected abstract int[,] ShapeMatrix { get; }
     protected abstract Vector2 StartPos { get; }
     public abstract int Id { get; }
@@ -8,7 +8,7 @@ public abstract class ShapeControl {
     public int[,] currentShapeMatrix;
     public int CurrentRows => currentShapeMatrix.GetLength(0);
     public int CurrentCols => currentShapeMatrix.GetLength(1);
-    public ShapeControl() {
+    public Shape() {
         currentShapeMatrix = ShapeMatrix;
         pos = StartPos;
     }
