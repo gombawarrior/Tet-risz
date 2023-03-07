@@ -10,6 +10,7 @@ public class Manager {
     }
     public Grid grid;
     public Queue queue;
+    public bool IsGameOver => !(grid.IsEmptyRow(0) && grid.IsEmptyRow(1));
     public int Score { get; private set; }
 
     public Manager() {
@@ -69,6 +70,8 @@ public class Manager {
 
         Score += grid.ClearFullRows();
 
-        ActiveShape = queue.UpdateShape();
+        if (!IsGameOver) {
+            ActiveShape = queue.UpdateShape();
+        }
     }
 }

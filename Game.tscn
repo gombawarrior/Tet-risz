@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://cs/GameWindow.cs" type="Script" id=1]
+[ext_resource path="res://cs/GameField.cs" type="Script" id=1]
 
 [node name="Tet" type="ColorRect"]
 margin_right = 650.0
@@ -25,7 +25,7 @@ margin_right = 420.0
 margin_bottom = 980.0
 color = Color( 0.180392, 0.0823529, 0.0823529, 1 )
 
-[node name="GameField" type="Sprite" parent="MainField"]
+[node name="GameCanvas" type="Sprite" parent="MainField"]
 
 [node name="Lines" type="ColorRect" parent="."]
 margin_left = 20.0
@@ -34,7 +34,7 @@ margin_right = 420.0
 margin_bottom = 140.0
 color = Color( 0.0941176, 0.101961, 0.345098, 1 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Lines"]
+[node name="LineText" type="RichTextLabel" parent="Lines"]
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -44,5 +44,3 @@ margin_top = 20.0
 margin_right = 630.0
 margin_bottom = 980.0
 color = Color( 0.364706, 0.164706, 0.270588, 1 )
-
-[node name="Timer" type="Timer" parent="."]
