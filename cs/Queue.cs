@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 
-public class Queue {
-    Random rand = new Random();
+public partial class Queue {
+    Random rand = new();
     public Shape[] Shapes = { 
         new IShape(),
         new JShape(),

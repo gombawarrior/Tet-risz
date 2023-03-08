@@ -35,8 +35,8 @@ public abstract class Shape {
 
 
     public void Move(int rows, int cols) {
-        pos.x += rows;
-        pos.y += cols;
+        pos.X += rows;
+        pos.Y += cols;
     }
 
     public void Reset() {

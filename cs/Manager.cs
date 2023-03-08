@@ -1,6 +1,6 @@
 using Godot;
 
-public class Manager {
+public partial class Manager {
     public Shape ActiveShape {
         get => ActiveShape;
         set {
@@ -21,10 +21,11 @@ public class Manager {
 
     private bool IsLegal() {
         for (int row = 0; row < ActiveShape.CurrentCols; row++) {
-            for (int col = 0; col < ActiveShape.CurrentRows; col++) {
-                if (ActiveShape.currentShapeMatrix[row, col] == 1) {
-                    if (!grid.IsEmpty((int)ActiveShape.pos.x + col, (int)ActiveShape.pos.y + row)) return false;
-                }
+            for (int col = 0; col < ActiveShape.CurrentRows; col++)
+            {
+                if (ActiveShape.currentShapeMatrix[row, col] != 1) continue;
+
+                if (!grid.IsEmpty((int)ActiveShape.pos.X + col, (int)ActiveShape.pos.Y + row)) return false;
             }
         }
         return true;
@@ -62,9 +63,9 @@ public class Manager {
     private void PlaceShapes() {
         for (int row = 0; row < ActiveShape.CurrentCols; row++) {
             for (int col = 0; col < ActiveShape.CurrentRows; col++) {
-                if (ActiveShape.currentShapeMatrix[row, col] == 1) {
-                    grid[(int)ActiveShape.pos.x + row, (int)ActiveShape.pos.y + col] = ActiveShape.Id;
-                }
+                if (ActiveShape.currentShapeMatrix[row, col] != 1) continue;
+
+                grid[(int)ActiveShape.pos.X + row, (int)ActiveShape.pos.Y + col] = ActiveShape.Id;
             }
         }
 

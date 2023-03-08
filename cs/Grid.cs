@@ -1,6 +1,6 @@
 using System.Linq;
 
-public class Grid {
+public partial class Grid {
 	public int Rows { get; }
 	public int Columns { get; }
 	readonly int[,] grid;

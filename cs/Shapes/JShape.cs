@@ -1,6 +1,6 @@
 using Godot;
 
-public class JShape : Shape {
+public partial class JShape : Shape {
     protected override int[,] ShapeMatrix => new int[2, 3] {
         {1, 1, 1},
         {0, 0, 1}
