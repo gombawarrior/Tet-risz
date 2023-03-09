@@ -13,7 +13,7 @@ public partial class Grid {
 	public Grid(int rows, int cols) {
 		Rows = rows;
 		Columns = cols;
-		grid = new int[cols, Rows];
+		grid = new int[Rows, Columns];
 	}
 
 	private bool IsInside(int row, int col) => row >= 0 && row < Rows && col >= 0 && col < Columns;
