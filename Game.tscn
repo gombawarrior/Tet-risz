@@ -24,7 +24,7 @@ offset_right = 420.0
 offset_bottom = 980.0
 color = Color(0.180392, 0.0823529, 0.0823529, 1)
 
-[node name="GameCanvas" type="Sprite2D" parent="MainField"]
+[node name="GameCanvas" type="Node2D" parent="MainField"]
 
 [node name="Lines" type="ColorRect" parent="."]
 layout_mode = 0
@@ -36,8 +36,8 @@ color = Color(0.0941176, 0.101961, 0.345098, 1)
 
 [node name="LineText" type="RichTextLabel" parent="Lines"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 393.0
+offset_bottom = 111.0
 
 [node name="Scoreboard" type="ColorRect" parent="."]
 layout_mode = 0
