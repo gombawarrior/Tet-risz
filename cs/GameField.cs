@@ -34,9 +34,7 @@ public partial class GameField : ColorRect {
 				ColorRect shapeControl = new();
 				shapeControl.Color = shapeColors[0];
 				shapeControl.Size = new Vector2(cellSize, cellSize);
-				//shapeControl.Position = new Vector2((rows - 2) * cellSize + padding, cols * cellSize + padding);
-				shapeControl.AnchorTop = (rows - 2) * cellSize + padding;
-				shapeControl.AnchorLeft = cols * cellSize + padding;
+				shapeControl.Position = new Vector2(cols * cellSize + padding, (rows - 2) * cellSize + padding);
 				gameCanvas.AddChild(shapeControl);
 				shapeControls[rows, cols] = shapeControl;
 			}
@@ -55,10 +53,10 @@ public partial class GameField : ColorRect {
 	}
 
 	private void DrawShapes(Shape shape) {
-		for (int rows = 0; rows < shape.CurrentRows; rows++) {
-			for (int cols = 0; cols < shape.CurrentCols; cols++) {
-				if (shape.currentShapeMatrix[rows, cols] == 1) {
-					shapeControls[rows, cols].Color = shapeColors[shape.Id];
+		for (int row = 0; row < shape.CurrentRows; row++) {
+			for (int col = 0; col < shape.CurrentCols; col++) {
+				if (shape.currentShapeMatrix[row, col] == 1) {
+					shapeControls[(int)shape.pos.X + row, (int)shape.pos.Y + col].Color = shapeColors[shape.Id];
 				}
 			}
 		}

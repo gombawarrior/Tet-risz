@@ -27,7 +27,7 @@ public partial class Manager
 			{
 				if (ActiveShape.currentShapeMatrix[row, col] != 1) continue;
 
-				if (!grid.IsEmpty((int)ActiveShape.pos.X + col, (int)ActiveShape.pos.Y + row)) return false;
+				if (!grid.IsEmpty((int)ActiveShape.pos.X + row, (int)ActiveShape.pos.Y + col)) return false;
 			}
 		}
 		return true;
