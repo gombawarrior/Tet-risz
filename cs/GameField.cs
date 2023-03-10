@@ -18,13 +18,27 @@ public partial class GameField : ColorRect {
 	Manager gameManager = new();
 	Node2D gameCanvas;
 	ColorRect[,] shapeControls;
-	public override async void _Ready() {
+    public override async void _Ready() {
 		gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
 		shapeControls = ConstructGameField(gameManager.grid);
 		await GameLoop();
 	}
 
-	private ColorRect[,] ConstructGameField(Grid grid) {
+    public override void _Input(InputEvent @event) {
+        bool rotatePressed = Input.IsActionJustPressed("rotate");
+        bool leftPressed = Input.IsActionPressed("left");
+        bool rightPressed = Input.IsActionPressed("right");
+        bool downPressed = Input.IsActionPressed("down");
+		
+		if (rotatePressed) gameManager.RotateShape();
+		if (leftPressed) gameManager.MoveLeft();
+		if (rightPressed) gameManager.MoveRight();
+		if (downPressed) gameManager.MoveDown();
+
+		Draw(gameManager);
+    }
+
+    private ColorRect[,] ConstructGameField(Grid grid) {
 		shapeControls = new ColorRect[grid.Rows, grid.Columns];
 		int cellSize = 20;
 		int padding = 5;

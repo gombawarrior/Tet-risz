@@ -15,8 +15,8 @@ public abstract class Shape {
     
     public void Rotate() {
         int[,] newShapeMatrix = new int[CurrentCols, CurrentRows];
-        for (int row = 0; row < CurrentRows; row++) {
-            for (int col = 0; col < CurrentCols; col++) {
+        for (int row = 0; row < CurrentCols; row++) {
+            for (int col = 0; col < CurrentRows; col++) {
                 newShapeMatrix[row, col] = currentShapeMatrix[CurrentRows - col - 1, row];
             }
         }
@@ -25,8 +25,8 @@ public abstract class Shape {
 
     public void RotateBack() {
         int[,] newShapeMatrix = new int[CurrentCols, CurrentRows];
-        for (int row = 0; row < CurrentRows; row++) {
-            for (int col = 0; col < CurrentCols; col++) {
+        for (int row = 0; row < CurrentCols; row++) {
+            for (int col = 0; col < CurrentRows; col++) {
                 newShapeMatrix[row, col] = currentShapeMatrix[col, CurrentCols - row - 1];
             }
         }

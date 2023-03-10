@@ -63,8 +63,8 @@ public partial class Manager
 	}
 
 	private void PlaceShapes() {
-		for (int row = 0; row < ActiveShape.CurrentCols; row++) {
-			for (int col = 0; col < ActiveShape.CurrentRows; col++) {
+		for (int row = 0; row < ActiveShape.CurrentRows; row++) {
+			for (int col = 0; col < ActiveShape.CurrentCols; col++) {
 				if (ActiveShape.currentShapeMatrix[row, col] != 1) continue;
 
 				grid[(int)ActiveShape.pos.X + row, (int)ActiveShape.pos.Y + col] = ActiveShape.Id;
