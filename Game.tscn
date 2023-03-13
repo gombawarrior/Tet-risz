@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bldndck8w1ejo"]
+[gd_scene load_steps=4 format=3 uid="uid://bldndck8w1ejo"]
 
 [ext_resource type="Script" path="res://cs/GameField.cs" id="1"]
+[ext_resource type="FontFile" uid="uid://b3ghiruifksbw" path="res://assets/FSEX300.ttf" id="2_tlyv2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_twh1u"]
+font = ExtResource("2_tlyv2")
+font_size = 50
 
 [node name="Tet" type="ColorRect"]
 offset_right = 650.0
@@ -34,10 +39,13 @@ offset_right = 420.0
 offset_bottom = 140.0
 color = Color(0.0941176, 0.101961, 0.345098, 1)
 
-[node name="LineText" type="RichTextLabel" parent="Lines"]
+[node name="LineText" type="Label" parent="Lines"]
 layout_mode = 0
-offset_right = 393.0
-offset_bottom = 111.0
+offset_left = 50.0
+offset_top = 30.0
+offset_right = 337.0
+offset_bottom = 89.0
+label_settings = SubResource("LabelSettings_twh1u")
 
 [node name="Scoreboard" type="ColorRect" parent="."]
 layout_mode = 0
