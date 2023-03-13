@@ -33,18 +33,20 @@ public partial class Grid {
 	private void MoveRowDown(int row, int distance) {
 		for (int col = 0; col < Columns; col++) {
 			grid[row + distance, col] = grid[row, col];
-		}
+            //grid[row, col] = 0;
+        }
+
 		ClearRow(row);
 	}
 
 	public int ClearFullRows() {
 		int clearedRows = 0;
-		for (int row = Rows - 1; row >= 0 && !IsEmptyRow(row); row--) {
+		for (int row = Rows - 1; row >= 0; row--) {
 			if (IsFullRow(row)) {
 				ClearRow(row);
 				clearedRows++;
 			}
-			if (clearedRows > 0) {
+			else if (clearedRows > 0) {
 				MoveRowDown(row, clearedRows);
 			}
 		}

@@ -16,7 +16,7 @@ public partial class Manager
 	public int Score { get; private set; }
 
 	public Manager() {
-		grid = new Grid(20, 22);
+		grid = new Grid(22, 10);
 		queue = new Queue();
 		ActiveShape = queue.UpdateShape();
 	}

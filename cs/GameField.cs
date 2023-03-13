@@ -41,7 +41,7 @@ public partial class GameField : ColorRect {
     private ColorRect[,] ConstructGameField(Grid grid) {
 		shapeControls = new ColorRect[grid.Rows, grid.Columns];
 		int cellSize = 20;
-		int padding = 5;
+		int padding = 0;
 
 		for (int rows = 0; rows < grid.Rows; rows++) {
 			for (int cols = 0;  cols < grid.Columns; cols++) {
@@ -79,8 +79,8 @@ public partial class GameField : ColorRect {
 	private void Draw(Manager gameManager) {
 		DrawGrid(gameManager.grid);
 		DrawShapes(gameManager.ActiveShape);
-		RichTextLabel lineText = GetNode<RichTextLabel>("Lines/LineText");
-		lineText.Text = $"LINES: {gameManager.Score}";
+		Label lineText = GetNode<Label>("Lines/LineText");
+		lineText.Text = $"LINES: {gameManager.Score:0000}";
 	}
 
 	private async Task GameLoop() {
