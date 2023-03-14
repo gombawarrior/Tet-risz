@@ -14,13 +14,13 @@ public partial class GameField : ColorRect {
 		new("purple")
 	};
 
-	float minDelay = 50;
-	float maxDelay = 1000;
+    float minDelay = 50;
+    float maxDelay = 1000;
     float delayDecrease = 50;
+    double nextMove = 0.075;
     Manager gameManager = new();
     Node2D gameCanvas, nextView;
-	ColorRect[,] shapeControls, nextShapeControls;
-
+    ColorRect[,] shapeControls, nextShapeControls;
     public override async void _Ready() {
 		gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
         nextView = GetNode<Node2D>("Scoreboard/ColorRect/NextView");
@@ -29,19 +29,25 @@ public partial class GameField : ColorRect {
         await GameLoop();
 	}
 
-    //public override void _Process(double delta) {
-    public override void _Input(InputEvent @event) {
+    public override void _Process(double delta) {
+		nextMove -= delta;
+
+        if (nextMove > 0) return;
         bool rotatePressed = Input.IsActionJustPressed("rotate");
         bool leftPressed = Input.IsActionPressed("left");
         bool rightPressed = Input.IsActionPressed("right");
         bool downPressed = Input.IsActionPressed("down");
-		
-		if (rotatePressed) gameManager.RotateShape();
-		if (leftPressed) gameManager.MoveLeft();
-		if (rightPressed) gameManager.MoveRight();
-		if (downPressed) gameManager.MoveDown();
 
-		Draw(gameManager);
+        if (rotatePressed) gameManager.RotateShape();
+        if (leftPressed) gameManager.MoveLeft();
+        if (rightPressed) gameManager.MoveRight();
+        if (downPressed) gameManager.MoveDown();
+
+		if (rotatePressed || leftPressed || rightPressed || downPressed) {
+            nextMove = 0.075;
+        }
+
+        Draw(gameManager);
     }
 
     private ColorRect[,] ConstructGameField(Grid grid) {
