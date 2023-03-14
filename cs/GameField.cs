@@ -14,12 +14,13 @@ public partial class GameField : ColorRect {
 		new("purple")
 	};
 
-	float delay = 1000;
-	Manager gameManager = new();
-	Node2D gameCanvas;
-    Node2D nextView;
-	ColorRect[,] shapeControls;
-	ColorRect[,] nextShapeControls;
+	float minDelay = 50;
+	float maxDelay = 1000;
+    float delayDecrease = 50;
+    Manager gameManager = new();
+    Node2D gameCanvas, nextView;
+	ColorRect[,] shapeControls, nextShapeControls;
+
     public override async void _Ready() {
 		gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
         nextView = GetNode<Node2D>("Scoreboard/ColorRect/NextView");
@@ -128,7 +129,9 @@ public partial class GameField : ColorRect {
 		Draw(gameManager);
 
 		while (!gameManager.IsGameOver) {
-			await Task.Delay(TimeSpan.FromMilliseconds(delay));
+            float delay = Math.Max(minDelay, maxDelay - (gameManager.Score * delayDecrease));
+
+            await Task.Delay(TimeSpan.FromMilliseconds(delay));
 			gameManager.MoveDown();
 			Draw(gameManager);
 		}

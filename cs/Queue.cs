@@ -13,6 +13,7 @@ public partial class Queue {
     };
     public Shape NextShape { get; private set; }
     private Shape RandomShape => Shapes[rand.Next(Shapes.Length)];
+    //private Shape RandomShape => Shapes[0];
 
     public Queue() {
         NextShape = RandomShape;
