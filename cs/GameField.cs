@@ -15,7 +15,8 @@ public partial class GameField : ColorRect {
 	};
 
 	float delay = 1000;
-    double nextMove = 0.05;
+    double nextMove = 0.075;
+    bool firstPressed = true;
     Manager gameManager = new();
 	Node2D gameCanvas;
     Node2D nextView;
@@ -44,8 +45,13 @@ public partial class GameField : ColorRect {
         if (rightPressed) gameManager.MoveRight();
         if (downPressed) gameManager.MoveDown();
 
+   //     if (firstPressed) {
+   //         Task.Delay(100);
+			//firstPressed = false;
+   //     }
+
 		if (rotatePressed || leftPressed || rightPressed || downPressed) {
-            nextMove = 0.05;
+            nextMove = 0.075;
         }
 
         Draw(gameManager);
