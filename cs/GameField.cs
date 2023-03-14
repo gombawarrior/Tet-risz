@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 public partial class GameField : ColorRect {
 	Color[] shapeColors = {
-		new("black", 0.5f),
+		new("black", 0.0f),
 		new("cyan"),
 		new("yellow"),
 		new("green"),
@@ -64,7 +64,7 @@ public partial class GameField : ColorRect {
 
     private ColorRect[,] ConstructNextShapeField() {
         nextShapeControls = new ColorRect[4, 4];
-        int cellSize = 20;
+        int cellSize = 25;
         int padding = 0;
 
         for (int rows = 0; rows < 4; rows++) {
@@ -72,7 +72,7 @@ public partial class GameField : ColorRect {
                 ColorRect shapeControl = new();
                 shapeControl.Color = shapeColors[0];
                 shapeControl.Size = new Vector2(cellSize, cellSize);
-                shapeControl.Position = new Vector2(cols * cellSize + padding, (rows - 2) * cellSize + padding);
+                shapeControl.Position = new Vector2(cols * cellSize + padding, rows * cellSize + padding);
                 nextView.AddChild(shapeControl);
                 nextShapeControls[rows, cols] = shapeControl;
             }
@@ -101,10 +101,17 @@ public partial class GameField : ColorRect {
 	}
 
     private void DrawNext(Shape nextShape) {
-		
+        for (int row = 0; row < nextShapeControls.GetLength(0); row++) {
+            for (int col = 0; col < nextShapeControls.GetLength(1); col++) {
+                nextShapeControls[row, col].Color = shapeColors[0];
+            }
+        }
+
         for (int row = 0; row < nextShape.CurrentRows; row++) {
             for (int col = 0; col < nextShape.CurrentCols; col++) {
-                nextShapeControls[row, col].Color = shapeColors[nextShape.Id];
+                if (nextShape.currentShapeMatrix[row, col] == 1) {
+                    nextShapeControls[row, col].Color = shapeColors[nextShape.Id];
+                }
             }
         }
     }

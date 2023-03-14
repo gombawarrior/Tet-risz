@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bldndck8w1ejo"]
+[gd_scene load_steps=5 format=3 uid="uid://bldndck8w1ejo"]
 
 [ext_resource type="Script" path="res://cs/GameField.cs" id="1"]
 [ext_resource type="FontFile" uid="uid://b3ghiruifksbw" path="res://assets/FSEX300.ttf" id="2_tlyv2"]
@@ -6,6 +6,11 @@
 [sub_resource type="LabelSettings" id="LabelSettings_twh1u"]
 font = ExtResource("2_tlyv2")
 font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_7x0a3"]
+line_spacing = 0.0
+font = ExtResource("2_tlyv2")
+font_size = 34
 
 [node name="Tet" type="ColorRect"]
 offset_right = 650.0
@@ -64,4 +69,14 @@ offset_bottom = 120.0
 color = Color(1, 0.803922, 1, 1)
 
 [node name="NextView" type="Node2D" parent="Scoreboard/ColorRect"]
-position = Vector2(20, 20)
+position = Vector2(55, 30)
+
+[node name="Label" type="Label" parent="Scoreboard"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 125.0
+offset_right = 190.0
+offset_bottom = 155.0
+text = "NEXT"
+label_settings = SubResource("LabelSettings_7x0a3")
+horizontal_alignment = 1
