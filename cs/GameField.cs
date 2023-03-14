@@ -15,7 +15,8 @@ public partial class GameField : ColorRect {
 	};
 
 	float delay = 1000;
-	Manager gameManager = new();
+    double nextMove = 0.05;
+    Manager gameManager = new();
 	Node2D gameCanvas;
     Node2D nextView;
 	ColorRect[,] shapeControls;
@@ -28,19 +29,26 @@ public partial class GameField : ColorRect {
         await GameLoop();
 	}
 
-    //public override void _Process(double delta) {
-    public override void _Input(InputEvent @event) {
+    //public override void _Input(InputEvent @event) {
+    public override void _Process(double delta) {
+		nextMove -= delta;
+
+        if (nextMove > 0) return;
         bool rotatePressed = Input.IsActionJustPressed("rotate");
         bool leftPressed = Input.IsActionPressed("left");
         bool rightPressed = Input.IsActionPressed("right");
         bool downPressed = Input.IsActionPressed("down");
-		
-		if (rotatePressed) gameManager.RotateShape();
-		if (leftPressed) gameManager.MoveLeft();
-		if (rightPressed) gameManager.MoveRight();
-		if (downPressed) gameManager.MoveDown();
 
-		Draw(gameManager);
+        if (rotatePressed) gameManager.RotateShape();
+        if (leftPressed) gameManager.MoveLeft();
+        if (rightPressed) gameManager.MoveRight();
+        if (downPressed) gameManager.MoveDown();
+
+		if (rotatePressed || leftPressed || rightPressed || downPressed) {
+            nextMove = 0.05;
+        }
+
+        Draw(gameManager);
     }
 
     private ColorRect[,] ConstructGameField(Grid grid) {
@@ -104,7 +112,9 @@ public partial class GameField : ColorRect {
 		
         for (int row = 0; row < nextShape.CurrentRows; row++) {
             for (int col = 0; col < nextShape.CurrentCols; col++) {
-                nextShapeControls[row, col].Color = shapeColors[nextShape.Id];
+                if (nextShape.currentShapeMatrix[row, col] == 1) {
+                    nextShapeControls[row, col].Color = shapeColors[nextShape.Id];
+                }
             }
         }
     }
