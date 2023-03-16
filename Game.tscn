@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bldndck8w1ejo"]
+[gd_scene load_steps=15 format=3 uid="uid://bldndck8w1ejo"]
 
 [ext_resource type="Script" path="res://cs/GameField.cs" id="1"]
 [ext_resource type="FontFile" uid="uid://b3ghiruifksbw" path="res://assets/FSEX300.ttf" id="2_tlyv2"]
@@ -11,6 +11,33 @@ font_size = 50
 line_spacing = 0.0
 font = ExtResource("2_tlyv2")
 font_size = 34
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_lhqtu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i0aoq"]
+font = ExtResource("2_tlyv2")
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_8aidu"]
+font_size = 30
+
+[sub_resource type="Theme" id="Theme_s0na1"]
+default_font_size = 30
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_yptok"]
+
+[sub_resource type="Theme" id="Theme_tqa2y"]
+default_font_size = 30
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_rlw8q"]
+
+[sub_resource type="Theme" id="Theme_hvlbq"]
+default_font_size = 30
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_vweuf"]
+
+[sub_resource type="Theme" id="Theme_7asm0"]
+default_font_size = 30
 
 [node name="Tet" type="ColorRect"]
 offset_right = 650.0
@@ -80,3 +107,102 @@ offset_bottom = 155.0
 text = "NEXT"
 label_settings = SubResource("LabelSettings_7x0a3")
 horizontal_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Menu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_left = 0.25
+anchor_top = 0.2
+anchor_right = 0.75
+anchor_bottom = 0.75
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuBg" type="TextureRect" parent="CanvasLayer/Menu"]
+modulate = Color(0.858824, 0.584314, 0.639216, 0.768627)
+layout_direction = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource("CanvasTexture_lhqtu")
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.08
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "TET-RISZ"
+label_settings = SubResource("LabelSettings_i0aoq")
+horizontal_alignment = 1
+
+[node name="StartLabel" type="Label" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.125
+anchor_right = 1.0
+anchor_bottom = 0.15
+offset_top = -17.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Válassz nehézséget!"
+label_settings = SubResource("LabelSettings_8aidu")
+horizontal_alignment = 1
+
+[node name="SelectWeak" type="Button" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.3
+anchor_right = 0.9
+anchor_bottom = 0.38
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_s0na1")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_yptok")
+text = "Gyenge"
+
+[node name="SelectMed" type="Button" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.4
+anchor_right = 0.9
+anchor_bottom = 0.48
+theme = SubResource("Theme_tqa2y")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_rlw8q")
+text = "Közepes"
+
+[node name="SelectHard" type="Button" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.5
+anchor_right = 0.9
+anchor_bottom = 0.58
+theme = SubResource("Theme_hvlbq")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_vweuf")
+text = "Erős"
+
+[node name="Play" type="Button" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.7
+anchor_right = 0.9
+anchor_bottom = 0.78
+theme = SubResource("Theme_7asm0")
+disabled = true
+text = "Játsz"

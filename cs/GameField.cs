@@ -17,13 +17,15 @@ public partial class GameField : ColorRect {
     float minDelay = 50;
     float maxDelay = 1000;
     float delayDecrease = 50;
-    double nextMove = 0.08;
+    double nextMove = 0.085;
     Manager gameManager = new();
     Node2D gameCanvas, nextView;
     ColorRect[,] shapeControls, nextShapeControls;
+    Control menu;
     public override async void _Ready() {
 		gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
         nextView = GetNode<Node2D>("Scoreboard/ColorRect/NextView");
+        menu = GetNode<Control>("CanvasLayer/Menu");
 		shapeControls = ConstructGameField(gameManager.grid);
         nextShapeControls = ConstructNextShapeField();
         await GameLoop();
@@ -44,7 +46,7 @@ public partial class GameField : ColorRect {
         if (downPressed) gameManager.MoveDown();
 
 		if (rotatePressed || leftPressed || rightPressed || downPressed) {
-            nextMove = 0.08;
+            nextMove = 0.085;
         }
 
         Draw(gameManager);
@@ -108,6 +110,7 @@ public partial class GameField : ColorRect {
 	}
 
     private void DrawNext(Shape nextShape) {
+		// clean nextView
         for (int row = 0; row < nextShapeControls.GetLength(0); row++) {
             for (int col = 0; col < nextShapeControls.GetLength(1); col++) {
                 nextShapeControls[row, col].Color = shapeColors[0];
@@ -140,6 +143,8 @@ public partial class GameField : ColorRect {
             await Task.Delay(TimeSpan.FromMilliseconds(delay));
 			gameManager.MoveDown();
 			Draw(gameManager);
-		}
-	}
+        }
+		GD.Print("halal");
+        menu.Visible = true;
+    }
 }

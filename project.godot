@@ -27,6 +27,7 @@ project/assembly_name="Tetrisz"
 
 [gui]
 
+theme/custom_font="res://assets/FSEX300.ttf"
 common/drop_mouse_on_gui_input_disabled=true
 
 [input]
