@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bldndck8w1ejo"]
+[gd_scene load_steps=16 format=3 uid="uid://bldndck8w1ejo"]
 
 [ext_resource type="Script" path="res://cs/GameField.cs" id="1"]
 [ext_resource type="FontFile" uid="uid://b3ghiruifksbw" path="res://assets/FSEX300.ttf" id="2_tlyv2"]
+[ext_resource type="Script" path="res://cs/Menu.cs" id="3_w6rsr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_twh1u"]
 font = ExtResource("2_tlyv2")
@@ -123,6 +124,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_w6rsr")
 
 [node name="MenuBg" type="TextureRect" parent="CanvasLayer/Menu"]
 modulate = Color(0.858824, 0.584314, 0.639216, 0.768627)
