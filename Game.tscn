@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bldndck8w1ejo"]
+[gd_scene load_steps=13 format=3 uid="uid://bldndck8w1ejo"]
 
 [ext_resource type="Script" path="res://cs/GameField.cs" id="1"]
 [ext_resource type="FontFile" uid="uid://b3ghiruifksbw" path="res://assets/FSEX300.ttf" id="2_tlyv2"]
@@ -25,17 +25,11 @@ font_size = 30
 [sub_resource type="Theme" id="Theme_s0na1"]
 default_font_size = 30
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_yptok"]
-
 [sub_resource type="Theme" id="Theme_tqa2y"]
 default_font_size = 30
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_rlw8q"]
-
 [sub_resource type="Theme" id="Theme_hvlbq"]
 default_font_size = 30
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_vweuf"]
 
 [sub_resource type="Theme" id="Theme_7asm0"]
 default_font_size = 30
@@ -171,7 +165,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_s0na1")
 toggle_mode = true
-button_group = SubResource("ButtonGroup_yptok")
 text = "Gyenge"
 
 [node name="SelectMed" type="Button" parent="CanvasLayer/Menu"]
@@ -183,7 +176,6 @@ anchor_right = 0.9
 anchor_bottom = 0.48
 theme = SubResource("Theme_tqa2y")
 toggle_mode = true
-button_group = SubResource("ButtonGroup_rlw8q")
 text = "Közepes"
 
 [node name="SelectHard" type="Button" parent="CanvasLayer/Menu"]
@@ -195,7 +187,6 @@ anchor_right = 0.9
 anchor_bottom = 0.58
 theme = SubResource("Theme_hvlbq")
 toggle_mode = true
-button_group = SubResource("ButtonGroup_vweuf")
 text = "Erős"
 
 [node name="Play" type="Button" parent="CanvasLayer/Menu"]
