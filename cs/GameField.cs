@@ -14,6 +14,7 @@ public partial class GameField : ColorRect {
 		new("purple")
 	};
 
+    private bool _gameRunning;
     private float _minDelay, _maxDelay, _delayDecrease;
     private double _nextMove = 0.085;
     private Manager _gameManager = new();
@@ -33,7 +34,7 @@ public partial class GameField : ColorRect {
 	}
 
     public override void _Process(double delta) {
-            if (_menu.Visible) return;
+            if (!_gameRunning) return;
 
             _nextMove -= delta;
 
@@ -152,6 +153,7 @@ public partial class GameField : ColorRect {
 
     public async void Play_Pressed(string difficulty) {
         _menu.Visible = false;
+        _gameRunning = true;
         switch (difficulty) {
             case "Weak":
                 _minDelay = 250;
