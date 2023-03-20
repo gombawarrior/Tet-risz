@@ -166,9 +166,11 @@ public partial class GameField : ColorRect {
             case "Hard":
                 minDelay = 100;
                 maxDelay = 650;
-                delayDecrease = 60;
+                delayDecrease = 70;
                 break;
         }
+
+        gameManager = new();
 
         await GameLoop();
     }
