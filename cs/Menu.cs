@@ -1,18 +1,21 @@
 using Godot;
 
 public partial class Menu : Control {
+    public static Menu Instance;
     public string Selected { get; private set; }
 
     public override void _Ready() {
+        Instance = this;
+
         Godot.Collections.Array<Node> gyerekek = GetChildren();
         foreach (Node n in gyerekek) {
             if (n.Name.ToString()[0] == 'S' && n is Button btn) {
-                GD.Print($"\t{n.Name.ToString()[0]}");
+                //GD.Print($"\t{n.Name.ToString()[0]}");
                 btn.Pressed += () => DiffButton_Pressed(n.Name.ToString()[6..]);
             }
         }
 
-        GetNode<Button>("Play").Pressed += Play_Pressed;
+        GetNode<Button>("Play").Pressed += () => GameField.Instance.Play_Pressed(Selected);
 
         UpdateColors();
     }
@@ -38,9 +41,5 @@ public partial class Menu : Control {
     private void DiffButton_Pressed(string start) {
         Selected = start;
         UpdateColors();
-    }
-
-    private void Play_Pressed() {
-        GD.Print($"jac {Selected}");
     }
 }

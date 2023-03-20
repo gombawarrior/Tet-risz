@@ -22,34 +22,39 @@ public partial class GameField : ColorRect {
     Node2D gameCanvas, nextView;
     ColorRect[,] shapeControls, nextShapeControls;
     Control menu;
-    public override async void _Ready() {
+    public static GameField Instance;
+
+    public override void _Ready() {
+        Instance = this;
+
 		gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
         nextView = GetNode<Node2D>("Scoreboard/ColorRect/NextView");
         menu = GetNode<Control>("CanvasLayer/Menu");
 		shapeControls = ConstructGameField(gameManager.grid);
         nextShapeControls = ConstructNextShapeField();
-        await GameLoop();
 	}
 
     public override void _Process(double delta) {
-		nextMove -= delta;
+        if (!menu.Visible) {
+            nextMove -= delta;
 
-        if (nextMove > 0) return;
-        bool rotatePressed = Input.IsActionJustPressed("rotate");
-        bool leftPressed = Input.IsActionPressed("left");
-        bool rightPressed = Input.IsActionPressed("right");
-        bool downPressed = Input.IsActionPressed("down");
+            if (nextMove > 0) return;
+            bool rotatePressed = Input.IsActionJustPressed("rotate");
+            bool leftPressed = Input.IsActionPressed("left");
+            bool rightPressed = Input.IsActionPressed("right");
+            bool downPressed = Input.IsActionPressed("down");
 
-        if (rotatePressed) gameManager.RotateShape();
-        if (leftPressed) gameManager.MoveLeft();
-        if (rightPressed) gameManager.MoveRight();
-        if (downPressed) gameManager.MoveDown();
+            if (rotatePressed) gameManager.RotateShape();
+            if (leftPressed) gameManager.MoveLeft();
+            if (rightPressed) gameManager.MoveRight();
+            if (downPressed) gameManager.MoveDown();
 
-		if (rotatePressed || leftPressed || rightPressed || downPressed) {
-            nextMove = 0.085;
+            if (rotatePressed || leftPressed || rightPressed || downPressed) {
+                nextMove = 0.085;
+            }
+
+            Draw(gameManager);
         }
-
-        Draw(gameManager);
     }
 
     private ColorRect[,] ConstructGameField(Grid grid) {
@@ -134,7 +139,7 @@ public partial class GameField : ColorRect {
 		lineText.Text = $"LINES: {gameManager.Score:0000}";
 	}
 
-	private async Task GameLoop() {
+	private async Task GameLoop(string difficulty) {
 		Draw(gameManager);
 
 		while (!gameManager.IsGameOver) {
@@ -144,7 +149,11 @@ public partial class GameField : ColorRect {
 			gameManager.MoveDown();
 			Draw(gameManager);
         }
-		GD.Print("halal");
         menu.Visible = true;
+    }
+
+    public async void Play_Pressed(string difficulty) {
+        menu.Visible = false;
+        await GameLoop(difficulty);
     }
 }
