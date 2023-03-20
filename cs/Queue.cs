@@ -1,7 +1,7 @@
 using System;
 
 public partial class Queue {
-    Random rand = new();
+    private readonly Random _rand = new();
     public Shape[] Shapes = { 
         new IShape(),
         new JShape(),
@@ -12,7 +12,7 @@ public partial class Queue {
         new TShape()
     };
     public Shape NextShape { get; private set; }
-    private Shape RandomShape => Shapes[rand.Next(Shapes.Length)];
+    private Shape RandomShape => Shapes[_rand.Next(Shapes.Length)];
     //private Shape RandomShape => Shapes[0];
 
     public Queue() {

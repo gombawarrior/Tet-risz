@@ -2,32 +2,32 @@ using Godot;
 
 public partial class Manager
 {
-	private Shape activeShape;
+	private Shape _activeShape;
 	public Shape ActiveShape {
-		get => activeShape;
+		get => _activeShape;
 		set {
-			activeShape = value;
-			activeShape.Reset();
+			_activeShape = value;
+			_activeShape.Reset();
 		}
 	}
-	public Grid grid;
-	public Queue queue;
-	public bool IsGameOver => !(grid.IsEmptyRow(0) && grid.IsEmptyRow(1));
+	public Grid Grid;
+	public Queue Queue;
+	public bool IsGameOver => !(Grid.IsEmptyRow(0) && Grid.IsEmptyRow(1));
 	public int Score { get; private set; }
 
 	public Manager() {
-		grid = new Grid(22, 10);
-		queue = new Queue();
-		ActiveShape = queue.UpdateShape();
+		Grid = new Grid(22, 10);
+		Queue = new Queue();
+		ActiveShape = Queue.UpdateShape();
 	}
 
 	private bool IsLegal() {
 		for (int row = 0; row < ActiveShape.CurrentRows; row++) {
 			for (int col = 0; col < ActiveShape.CurrentCols; col++)
 			{
-				if (ActiveShape.currentShapeMatrix[row, col] != 1) continue;
+				if (ActiveShape.CurrentShapeMatrix[row, col] != 1) continue;
 
-				if (!grid.IsEmpty((int)ActiveShape.pos.X + row, (int)ActiveShape.pos.Y + col)) return false;
+				if (!Grid.IsEmpty((int)ActiveShape.Pos.X + row, (int)ActiveShape.Pos.Y + col)) return false;
 			}
 		}
 		return true;
@@ -65,16 +65,16 @@ public partial class Manager
 	private void PlaceShapes() {
 		for (int row = 0; row < ActiveShape.CurrentRows; row++) {
 			for (int col = 0; col < ActiveShape.CurrentCols; col++) {
-				if (ActiveShape.currentShapeMatrix[row, col] != 1) continue;
+				if (ActiveShape.CurrentShapeMatrix[row, col] != 1) continue;
 
-				grid[(int)ActiveShape.pos.X + row, (int)ActiveShape.pos.Y + col] = ActiveShape.Id;
+				Grid[(int)ActiveShape.Pos.X + row, (int)ActiveShape.Pos.Y + col] = ActiveShape.Id;
 			}
 		}
 
-		Score += grid.ClearFullRows();
+		Score += Grid.ClearFullRows();
 
 		if (!IsGameOver) {
-			ActiveShape = queue.UpdateShape();
+			ActiveShape = Queue.UpdateShape();
 		}
 	}
 }

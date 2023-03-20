@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 
 public partial class GameField : ColorRect {
-	Color[] shapeColors = {
+    private Color[] _shapeColors = {
 		new("black", 0.0f),
 		new("cyan"),
 		new("yellow"),
@@ -14,90 +14,90 @@ public partial class GameField : ColorRect {
 		new("purple")
 	};
 
-    float minDelay, maxDelay, delayDecrease;
-    double nextMove = 0.085;
-    Manager gameManager = new();
-    Node2D gameCanvas, nextView;
-    ColorRect[,] shapeControls, nextShapeControls;
-    Control menu;
+    private float _minDelay, _maxDelay, _delayDecrease;
+    private double _nextMove = 0.085;
+    private Manager _gameManager = new();
+    private Node2D _gameCanvas, _nextView;
+    private ColorRect[,] _shapeControls, _nextShapeControls;
+    private Control _menu;
     public static GameField Instance;
 
     public override void _Ready() {
         Instance = this;
 
-		gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
-        nextView = GetNode<Node2D>("Scoreboard/ColorRect/NextView");
-        menu = GetNode<Control>("CanvasLayer/Menu");
-		shapeControls = ConstructGameField(gameManager.grid);
-        nextShapeControls = ConstructNextShapeField();
+		_gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
+        _nextView = GetNode<Node2D>("Scoreboard/ColorRect/NextView");
+        _menu = GetNode<Control>("CanvasLayer/Menu");
+		_shapeControls = ConstructGameField(_gameManager.Grid);
+        _nextShapeControls = ConstructNextShapeField();
 	}
 
     public override void _Process(double delta) {
-        if (!menu.Visible) {
-            nextMove -= delta;
+            if (_menu.Visible) return;
 
-            if (nextMove > 0) return;
+            _nextMove -= delta;
+
+            if (_nextMove > 0) return;
             bool rotatePressed = Input.IsActionJustPressed("rotate");
             bool leftPressed = Input.IsActionPressed("left");
             bool rightPressed = Input.IsActionPressed("right");
             bool downPressed = Input.IsActionPressed("down");
 
-            if (rotatePressed) gameManager.RotateShape();
-            if (leftPressed) gameManager.MoveLeft();
-            if (rightPressed) gameManager.MoveRight();
-            if (downPressed) gameManager.MoveDown();
+            if (rotatePressed) _gameManager.RotateShape();
+            if (leftPressed) _gameManager.MoveLeft();
+            if (rightPressed) _gameManager.MoveRight();
+            if (downPressed) _gameManager.MoveDown();
 
             if (rotatePressed || leftPressed || rightPressed || downPressed) {
-                nextMove = 0.085;
+                _nextMove = 0.085;
             }
 
-            Draw(gameManager);
+            Draw(_gameManager);
         }
-    }
 
     private ColorRect[,] ConstructGameField(Grid grid) {
-		shapeControls = new ColorRect[grid.Rows, grid.Columns];
-		int cellSize = 40;
-		int padding = 0;
+		_shapeControls = new ColorRect[grid.Rows, grid.Columns];
+		const int cellSize = 40;
+		const int padding = 0;
 
 		for (int rows = 0; rows < grid.Rows; rows++) {
 			for (int cols = 0;  cols < grid.Columns; cols++) {
 				ColorRect shapeControl = new();
-				shapeControl.Color = shapeColors[0];
+				shapeControl.Color = _shapeColors[0];
 				shapeControl.Size = new Vector2(cellSize, cellSize);
 				shapeControl.Position = new Vector2(cols * cellSize + padding, (rows - 2) * cellSize + padding);
-				gameCanvas.AddChild(shapeControl);
-				shapeControls[rows, cols] = shapeControl;
+				_gameCanvas.AddChild(shapeControl);
+				_shapeControls[rows, cols] = shapeControl;
 			}
 		}
 
-		return shapeControls;
+		return _shapeControls;
 	}
 
     private ColorRect[,] ConstructNextShapeField() {
-        nextShapeControls = new ColorRect[4, 4];
-        int cellSize = 25;
-        int padding = 0;
+        _nextShapeControls = new ColorRect[4, 4];
+        const int cellSize = 25;
+        const int padding = 0;
 
         for (int rows = 0; rows < 4; rows++) {
             for (int cols = 0; cols < 4; cols++) {
                 ColorRect shapeControl = new();
-                shapeControl.Color = shapeColors[0];
+                shapeControl.Color = _shapeColors[0];
                 shapeControl.Size = new Vector2(cellSize, cellSize);
                 shapeControl.Position = new Vector2(cols * cellSize + padding, rows * cellSize + padding);
-                nextView.AddChild(shapeControl);
-                nextShapeControls[rows, cols] = shapeControl;
+                _nextView.AddChild(shapeControl);
+                _nextShapeControls[rows, cols] = shapeControl;
             }
         }
 
-        return nextShapeControls;
+        return _nextShapeControls;
     }
 
     private void DrawGrid(Grid grid) {
 		for (int rows = 0; rows < grid.Rows; rows++) {
 			for (int cols = 0; cols < grid.Columns; cols++) {
 				int id = grid[rows, cols];
-				shapeControls[rows, cols].Color = shapeColors[id];
+				_shapeControls[rows, cols].Color = _shapeColors[id];
 			}
 		}
 	}
@@ -105,8 +105,8 @@ public partial class GameField : ColorRect {
 	private void DrawShapes(Shape shape) {
 		for (int row = 0; row < shape.CurrentRows; row++) {
 			for (int col = 0; col < shape.CurrentCols; col++) {
-				if (shape.currentShapeMatrix[row, col] == 1) {
-					shapeControls[(int)shape.pos.X + row, (int)shape.pos.Y + col].Color = shapeColors[shape.Id];
+				if (shape.CurrentShapeMatrix[row, col] == 1) {
+					_shapeControls[(int)shape.Pos.X + row, (int)shape.Pos.Y + col].Color = _shapeColors[shape.Id];
 				}
 			}
 		}
@@ -114,63 +114,63 @@ public partial class GameField : ColorRect {
 
     private void DrawNext(Shape nextShape) {
 		// clean nextView
-        for (int row = 0; row < nextShapeControls.GetLength(0); row++) {
-            for (int col = 0; col < nextShapeControls.GetLength(1); col++) {
-                nextShapeControls[row, col].Color = shapeColors[0];
+        for (int row = 0; row < _nextShapeControls.GetLength(0); row++) {
+            for (int col = 0; col < _nextShapeControls.GetLength(1); col++) {
+                _nextShapeControls[row, col].Color = _shapeColors[0];
             }
         }
 
         for (int row = 0; row < nextShape.CurrentRows; row++) {
             for (int col = 0; col < nextShape.CurrentCols; col++) {
-                if (nextShape.currentShapeMatrix[row, col] == 1) {
-                    nextShapeControls[row, col].Color = shapeColors[nextShape.Id];
+                if (nextShape.CurrentShapeMatrix[row, col] == 1) {
+                    _nextShapeControls[row, col].Color = _shapeColors[nextShape.Id];
                 }
             }
         }
     }
 
 	private void Draw(Manager gameManager) {
-		DrawGrid(gameManager.grid);
+		DrawGrid(gameManager.Grid);
 		DrawShapes(gameManager.ActiveShape);
-		DrawNext(gameManager.queue.NextShape);
+		DrawNext(gameManager.Queue.NextShape);
 		Label lineText = GetNode<Label>("Lines/LineText");
 		lineText.Text = $"LINES: {gameManager.Score:0000}";
 	}
 
 	private async Task GameLoop() {
-		Draw(gameManager);
+		Draw(_gameManager);
 
-		while (!gameManager.IsGameOver) {
-            float delay = Math.Max(minDelay, maxDelay - (gameManager.Score * delayDecrease));
+		while (!_gameManager.IsGameOver) {
+            float delay = Math.Max(_minDelay, _maxDelay - (_gameManager.Score * _delayDecrease));
 
             await Task.Delay(TimeSpan.FromMilliseconds(delay));
-			gameManager.MoveDown();
-			Draw(gameManager);
+			_gameManager.MoveDown();
+			Draw(_gameManager);
         }
-        menu.Visible = true;
+        _menu.Visible = true;
     }
 
     public async void Play_Pressed(string difficulty) {
-        menu.Visible = false;
+        _menu.Visible = false;
         switch (difficulty) {
             case "Weak":
-                minDelay = 250;
-                maxDelay = 1000;
-                delayDecrease = 40;
+                _minDelay = 250;
+                _maxDelay = 1000;
+                _delayDecrease = 40;
                 break;
             case "Med":
-                minDelay = 175;
-                maxDelay = 850;
-                delayDecrease = 50;
+                _minDelay = 175;
+                _maxDelay = 850;
+                _delayDecrease = 50;
                 break;
             case "Hard":
-                minDelay = 100;
-                maxDelay = 650;
-                delayDecrease = 70;
+                _minDelay = 100;
+                _maxDelay = 650;
+                _delayDecrease = 70;
                 break;
         }
 
-        gameManager = new();
+        _gameManager = new Manager();
 
         await GameLoop();
     }
