@@ -14,9 +14,7 @@ public partial class GameField : ColorRect {
 		new("purple")
 	};
 
-    float minDelay = 50;
-    float maxDelay = 1000;
-    float delayDecrease = 50;
+    float minDelay, maxDelay, delayDecrease;
     double nextMove = 0.085;
     Manager gameManager = new();
     Node2D gameCanvas, nextView;
@@ -139,7 +137,7 @@ public partial class GameField : ColorRect {
 		lineText.Text = $"LINES: {gameManager.Score:0000}";
 	}
 
-	private async Task GameLoop(string difficulty) {
+	private async Task GameLoop() {
 		Draw(gameManager);
 
 		while (!gameManager.IsGameOver) {
@@ -154,6 +152,24 @@ public partial class GameField : ColorRect {
 
     public async void Play_Pressed(string difficulty) {
         menu.Visible = false;
-        await GameLoop(difficulty);
+        switch (difficulty) {
+            case "Weak":
+                minDelay = 250;
+                maxDelay = 1000;
+                delayDecrease = 40;
+                break;
+            case "Med":
+                minDelay = 175;
+                maxDelay = 850;
+                delayDecrease = 50;
+                break;
+            case "Hard":
+                minDelay = 100;
+                maxDelay = 650;
+                delayDecrease = 60;
+                break;
+        }
+
+        await GameLoop();
     }
 }
