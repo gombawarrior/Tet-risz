@@ -15,6 +15,9 @@ public partial class Menu : Control {
 
         GetNode<Button>("Play").Pressed += () => GameField.Instance.Play_Pressed(_selected);
 
+        GetNode<Button>("Config").Pressed += GameField.Instance.ConfigButton_Pressed;
+        GetNode<Button>("Leaderboard").Pressed += GameField.Instance.LeaderButton_Pressed;
+
         UpdateColors();
     }
 

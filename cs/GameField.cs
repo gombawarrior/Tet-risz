@@ -176,4 +176,11 @@ public partial class GameField : ColorRect {
 
         await GameLoop();
     }
+    public void ConfigButton_Pressed() {
+
+    }
+
+    public void LeaderButton_Pressed() {
+
+    }
 }
