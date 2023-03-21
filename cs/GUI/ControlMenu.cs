@@ -1,41 +1,48 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public partial class ControlMenu : Control {
     private string _action;
     private Control _popup;
-    //private Godot.Collections.Array<StringName> _actionArray;
+    private InputEventKey EventKey(string action) => (InputEventKey)InputMap.ActionGetEvents(action)[0];
     public static ControlMenu Instance;
 
     public override void _Ready() {
         Instance = this;
 
         _popup = GetNode<Control>("PopupMenu");
-        //_actionArray = InputMap.GetActions();
         
         foreach (Node n in GetChildren()) {
             if (n.Name.ToString()[0] == 'B' && n is Button btn) {
                 string action = btn.Name.ToString()[6..];
-                var eventKey = (InputEventKey)InputMap.ActionGetEvents(action)[0];
-                btn.Text = eventKey.Keycode.ToString();
-                btn.Pressed += () => ControlButton_Pressed(action, eventKey);
-                
+                btn.Text = EventKey(action).Keycode.ToString();
+                btn.Pressed += () => ControlButton_Pressed(action);
             }
         }
-        
     }
 
-    private void ControlButton_Pressed(string action, InputEventKey actionKey) {
+    private void UpdateKeys() {
+        foreach (Node n in GetChildren()) {
+            if (n.Name.ToString()[0] == 'B' && n is Button btn) {
+                string action = btn.Name.ToString()[6..];
+                btn.Text = EventKey(action).Keycode.ToString();
+            }
+        }
+    }
+
+    private void ControlButton_Pressed(string action) {
         _action = action;
         PopMenu.Instance.Action = _action;
-        PopMenu.Instance.Key = actionKey;
+        PopMenu.Instance.Key = EventKey(_action);
         _popup.Visible = true;
     }
 
     public void Ok_Pressed(InputEventKey input) {
         _popup.Visible = false;
-        
+        InputMap.ActionEraseEvents(_action);
+        InputMap.ActionAddEvent(_action, PopMenu.Instance.Key);
+
+        UpdateKeys();
     }
 }
