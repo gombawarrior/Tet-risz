@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://bldndck8w1ejo"]
+[gd_scene load_steps=23 format=3 uid="uid://bldndck8w1ejo"]
 
 [ext_resource type="Script" path="res://cs/GUI/GameField.cs" id="1_54325"]
 [ext_resource type="FontFile" uid="uid://b3ghiruifksbw" path="res://assets/FSEX300.ttf" id="2_tlyv2"]
 [ext_resource type="Script" path="res://cs/GUI/Menu.cs" id="3_7imd6"]
 [ext_resource type="Script" path="res://cs/GUI/ControlMenu.cs" id="4_ygmtb"]
+[ext_resource type="Script" path="res://cs/GUI/PopMenu.cs" id="5_5u177"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_twh1u"]
 font = ExtResource("2_tlyv2")
@@ -416,11 +417,13 @@ anchor_bottom = 0.6
 text = "Up"
 
 [node name="PopupMenu" type="Control" parent="CanvasLayer/ControlMenu"]
+visible = false
 layout_mode = 1
 anchor_left = 0.05
 anchor_top = 0.2
 anchor_right = 0.975
 anchor_bottom = 0.725
+script = ExtResource("5_5u177")
 
 [node name="MenuBg" type="TextureRect" parent="CanvasLayer/ControlMenu/PopupMenu"]
 modulate = Color(0.243137, 0.247059, 0.160784, 0.960784)
@@ -462,3 +465,5 @@ anchor_right = 0.65
 anchor_bottom = 0.85
 theme = SubResource("Theme_je1c1")
 text = "OK"
+
+[connection signal="visibility_changed" from="CanvasLayer/ControlMenu/PopupMenu" to="." method="Visibility_Changed"]
