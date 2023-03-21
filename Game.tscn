@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bldndck8w1ejo"]
+[gd_scene load_steps=22 format=3 uid="uid://bldndck8w1ejo"]
 
-[ext_resource type="Script" path="res://cs/GameField.cs" id="1"]
+[ext_resource type="Script" path="res://cs/GUI/GameField.cs" id="1_54325"]
 [ext_resource type="FontFile" uid="uid://b3ghiruifksbw" path="res://assets/FSEX300.ttf" id="2_tlyv2"]
-[ext_resource type="Script" path="res://cs/Menu.cs" id="3_w6rsr"]
+[ext_resource type="Script" path="res://cs/GUI/Menu.cs" id="3_7imd6"]
+[ext_resource type="Script" path="res://cs/GUI/ControlMenu.cs" id="4_ygmtb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_twh1u"]
 font = ExtResource("2_tlyv2")
@@ -46,11 +47,22 @@ font_size = 26
 [sub_resource type="LabelSettings" id="LabelSettings_c3qpy"]
 font_size = 26
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_b10ah"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l33g2"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ittr"]
+font_size = 42
+
+[sub_resource type="Theme" id="Theme_je1c1"]
+default_font_size = 28
+
 [node name="Tet" type="ColorRect"]
 offset_right = 650.0
 offset_bottom = 1000.0
 color = Color(0.952941, 0.937255, 0.937255, 1)
-script = ExtResource("1")
+script = ExtResource("1_54325")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -139,7 +151,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_w6rsr")
+script = ExtResource("3_7imd6")
 
 [node name="MenuBg" type="TextureRect" parent="CanvasLayer/MainMenu"]
 modulate = Color(0.858824, 0.584314, 0.639216, 0.768627)
@@ -257,7 +269,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_w6rsr")
+script = ExtResource("4_ygmtb")
 
 [node name="MenuBg" type="TextureRect" parent="CanvasLayer/ControlMenu"]
 modulate = Color(0.858824, 0.584314, 0.639216, 0.768627)
@@ -356,28 +368,26 @@ offset_bottom = 30.0
 text = "Mozgatás balra"
 label_settings = SubResource("LabelSettings_h1j6u")
 
-[node name="ButtonLeft" type="Label" parent="CanvasLayer/ControlMenu"]
+[node name="ButtonLeft" type="Button" parent="CanvasLayer/ControlMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.3
-anchor_right = 0.2
+anchor_right = 0.3
 anchor_bottom = 0.3
 text = "Left"
-label_settings = SubResource("LabelSettings_h1j6u")
 
-[node name="ButtonRight" type="Label" parent="CanvasLayer/ControlMenu"]
+[node name="ButtonRight" type="Button" parent="CanvasLayer/ControlMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.375
-anchor_right = 0.2
+anchor_right = 0.3
 anchor_bottom = 0.375
 text = "Right
 "
-label_settings = SubResource("LabelSettings_h1j6u")
 
-[node name="ButtonDown" type="Label" parent="CanvasLayer/ControlMenu"]
+[node name="ButtonDown" type="Button" parent="CanvasLayer/ControlMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -385,9 +395,8 @@ anchor_top = 0.45
 anchor_right = 0.3
 anchor_bottom = 0.45
 text = "Down"
-label_settings = SubResource("LabelSettings_h1j6u")
 
-[node name="ButtonDrop" type="Label" parent="CanvasLayer/ControlMenu"]
+[node name="ButtonDrop" type="Button" parent="CanvasLayer/ControlMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -396,14 +405,60 @@ anchor_right = 0.3
 anchor_bottom = 0.525
 grow_horizontal = 2
 text = "Space"
-label_settings = SubResource("LabelSettings_h1j6u")
 
-[node name="ButtonRotate" type="Label" parent="CanvasLayer/ControlMenu"]
+[node name="ButtonRotate" type="Button" parent="CanvasLayer/ControlMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.6
-anchor_right = 0.35
+anchor_right = 0.3
 anchor_bottom = 0.6
 text = "Up"
-label_settings = SubResource("LabelSettings_h1j6u")
+
+[node name="PopupMenu" type="Control" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchor_left = 0.05
+anchor_top = 0.2
+anchor_right = 0.975
+anchor_bottom = 0.725
+
+[node name="MenuBg" type="TextureRect" parent="CanvasLayer/ControlMenu/PopupMenu"]
+modulate = Color(0.243137, 0.247059, 0.160784, 0.960784)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_b10ah")
+
+[node name="ActionLabel" type="Label" parent="CanvasLayer/ControlMenu/PopupMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.1
+text = "Akció"
+label_settings = SubResource("LabelSettings_l33g2")
+horizontal_alignment = 1
+
+[node name="InputLabel" type="Label" parent="CanvasLayer/ControlMenu/PopupMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.35
+anchor_right = 1.0
+anchor_bottom = 0.35
+text = "Gomb"
+label_settings = SubResource("LabelSettings_2ittr")
+horizontal_alignment = 1
+
+[node name="OK" type="Button" parent="CanvasLayer/ControlMenu/PopupMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.75
+anchor_right = 0.65
+anchor_bottom = 0.85
+theme = SubResource("Theme_je1c1")
+text = "OK"
