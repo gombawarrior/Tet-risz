@@ -39,10 +39,10 @@ public partial class GameField : ColorRect {
             _nextMove -= delta;
 
             if (_nextMove > 0) return;
-            bool rotatePressed = Input.IsActionJustPressed("rotate");
-            bool leftPressed = Input.IsActionPressed("left");
-            bool rightPressed = Input.IsActionPressed("right");
-            bool downPressed = Input.IsActionPressed("down");
+            bool rotatePressed = Input.IsActionJustPressed("Rotate");
+            bool leftPressed = Input.IsActionPressed("Left");
+            bool rightPressed = Input.IsActionPressed("Right");
+            bool downPressed = Input.IsActionPressed("Down");
 
             if (rotatePressed) _gameManager.RotateShape();
             if (leftPressed) _gameManager.MoveLeft();
