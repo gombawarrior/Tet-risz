@@ -465,5 +465,3 @@ anchor_right = 0.65
 anchor_bottom = 0.85
 theme = SubResource("Theme_je1c1")
 text = "OK"
-
-[connection signal="visibility_changed" from="CanvasLayer/ControlMenu/PopupMenu" to="." method="Visibility_Changed"]
