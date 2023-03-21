@@ -28,7 +28,7 @@ public partial class GameField : ColorRect {
 
 		_gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
         _nextView = GetNode<Node2D>("Scoreboard/ColorRect/NextView");
-        _menu = GetNode<Control>("CanvasLayer/Menu");
+        _menu = GetNode<Control>("CanvasLayer/MainMenu");
 		_shapeControls = ConstructGameField(_gameManager.Grid);
         _nextShapeControls = ConstructNextShapeField();
 	}
