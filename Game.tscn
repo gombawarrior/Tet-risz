@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bldndck8w1ejo"]
+[gd_scene load_steps=17 format=3 uid="uid://bldndck8w1ejo"]
 
 [ext_resource type="Script" path="res://cs/GameField.cs" id="1"]
 [ext_resource type="FontFile" uid="uid://b3ghiruifksbw" path="res://assets/FSEX300.ttf" id="2_tlyv2"]
@@ -33,6 +33,18 @@ default_font_size = 30
 
 [sub_resource type="Theme" id="Theme_7asm0"]
 default_font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_h1j6u"]
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_pi7rg"]
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_lewqx"]
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_c3qpy"]
+font_size = 26
 
 [node name="Tet" type="ColorRect"]
 offset_right = 650.0
@@ -114,7 +126,8 @@ color = Color(0.294118, 0.0862745, 0.0862745, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="Menu" type="Control" parent="CanvasLayer"]
+[node name="MainMenu" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchor_left = 0.25
 anchor_top = 0.2
@@ -128,7 +141,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_w6rsr")
 
-[node name="MenuBg" type="TextureRect" parent="CanvasLayer/Menu"]
+[node name="MenuBg" type="TextureRect" parent="CanvasLayer/MainMenu"]
 modulate = Color(0.858824, 0.584314, 0.639216, 0.768627)
 layout_direction = 1
 layout_mode = 1
@@ -137,7 +150,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = SubResource("CanvasTexture_lhqtu")
 
-[node name="TitleLabel" type="Label" parent="CanvasLayer/Menu"]
+[node name="TitleLabel" type="Label" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -148,7 +161,7 @@ text = "TET-RISZ"
 label_settings = SubResource("LabelSettings_i0aoq")
 horizontal_alignment = 1
 
-[node name="StartLabel" type="Label" parent="CanvasLayer/Menu"]
+[node name="StartLabel" type="Label" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.125
@@ -162,7 +175,7 @@ text = "Válassz nehézséget!"
 label_settings = SubResource("LabelSettings_8aidu")
 horizontal_alignment = 1
 
-[node name="SelectWeak" type="Button" parent="CanvasLayer/Menu"]
+[node name="SelectWeak" type="Button" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -177,7 +190,7 @@ theme = SubResource("Theme_s0na1")
 toggle_mode = true
 text = "Gyenge"
 
-[node name="SelectMed" type="Button" parent="CanvasLayer/Menu"]
+[node name="SelectMed" type="Button" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -190,7 +203,7 @@ theme = SubResource("Theme_tqa2y")
 toggle_mode = true
 text = "Közepes"
 
-[node name="SelectHard" type="Button" parent="CanvasLayer/Menu"]
+[node name="SelectHard" type="Button" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -203,7 +216,7 @@ theme = SubResource("Theme_hvlbq")
 toggle_mode = true
 text = "Erős"
 
-[node name="Play" type="Button" parent="CanvasLayer/Menu"]
+[node name="Play" type="Button" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -214,7 +227,7 @@ theme = SubResource("Theme_7asm0")
 disabled = true
 text = "Játsz"
 
-[node name="Leaderboard" type="Button" parent="CanvasLayer/Menu"]
+[node name="Leaderboard" type="Button" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.55
@@ -223,7 +236,7 @@ anchor_right = 0.9
 anchor_bottom = 0.26
 text = "Ranglista"
 
-[node name="Config" type="Button" parent="CanvasLayer/Menu"]
+[node name="Config" type="Button" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -231,3 +244,166 @@ anchor_top = 0.2
 anchor_right = 0.45
 anchor_bottom = 0.26
 text = "Konfiguráció"
+
+[node name="ControlMenu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_left = 0.25
+anchor_top = 0.2
+anchor_right = 0.75
+anchor_bottom = 0.75
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_w6rsr")
+
+[node name="MenuBg" type="TextureRect" parent="CanvasLayer/ControlMenu"]
+modulate = Color(0.858824, 0.584314, 0.639216, 0.768627)
+layout_direction = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource("CanvasTexture_lhqtu")
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.08
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "TET-RISZ"
+label_settings = SubResource("LabelSettings_i0aoq")
+horizontal_alignment = 1
+
+[node name="StartLabel" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.125
+anchor_right = 1.0
+anchor_bottom = 0.15
+offset_top = -17.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Irányítás módosítása"
+label_settings = SubResource("LabelSettings_8aidu")
+horizontal_alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.7
+anchor_right = 0.9
+anchor_bottom = 0.78
+theme = SubResource("Theme_7asm0")
+disabled = true
+text = "Játsz"
+
+[node name="Label" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.375
+anchor_right = 0.35
+anchor_bottom = 0.4
+text = "Mozgatás jobbra"
+label_settings = SubResource("LabelSettings_h1j6u")
+
+[node name="Label2" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.45
+anchor_right = 0.35
+anchor_bottom = 0.5
+text = "Mozgatás le"
+label_settings = SubResource("LabelSettings_pi7rg")
+
+[node name="Label3" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.525
+anchor_right = 0.35
+anchor_bottom = 0.55
+text = "Dobás "
+label_settings = SubResource("LabelSettings_lewqx")
+
+[node name="Label4" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 0.6
+text = "Forgatás"
+label_settings = SubResource("LabelSettings_c3qpy")
+
+[node name="Label5" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.3
+anchor_right = 0.35
+anchor_bottom = 0.3
+offset_right = 182.0
+offset_bottom = 30.0
+text = "Mozgatás balra"
+label_settings = SubResource("LabelSettings_h1j6u")
+
+[node name="ButtonLeft" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.3
+anchor_right = 0.2
+anchor_bottom = 0.3
+text = "Left"
+label_settings = SubResource("LabelSettings_h1j6u")
+
+[node name="ButtonRight" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.375
+anchor_right = 0.2
+anchor_bottom = 0.375
+text = "Right
+"
+label_settings = SubResource("LabelSettings_h1j6u")
+
+[node name="ButtonDown" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.45
+anchor_right = 0.3
+anchor_bottom = 0.45
+text = "Down"
+label_settings = SubResource("LabelSettings_h1j6u")
+
+[node name="ButtonDrop" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.525
+anchor_right = 0.3
+anchor_bottom = 0.525
+grow_horizontal = 2
+text = "Space"
+label_settings = SubResource("LabelSettings_h1j6u")
+
+[node name="ButtonRotate" type="Label" parent="CanvasLayer/ControlMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.6
+anchor_right = 0.35
+anchor_bottom = 0.6
+text = "Up"
+label_settings = SubResource("LabelSettings_h1j6u")
