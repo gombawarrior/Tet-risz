@@ -19,6 +19,7 @@ public partial class Menu : Control {
         GetNode<Button>("Play").Pressed += () => GameField.Instance.Play_Pressed(_selected);
 
         GetNode<Button>("Config").Pressed += ConfigButton_Pressed;
+        GetNode<Button>("Exit").Pressed += ExitButton_Pressed;
 
         UpdateColors();
     }
@@ -44,6 +45,10 @@ public partial class Menu : Control {
     private void DiffButton_Pressed(string start) {
         _selected = start;
         UpdateColors();
+    }
+
+    private void ExitButton_Pressed() {
+        GetTree().Quit();
     }
 
     public void ConfigButton_Pressed() {

@@ -239,6 +239,16 @@ theme = SubResource("Theme_7asm0")
 disabled = true
 text = "Játsz"
 
+[node name="Exit" type="Button" parent="CanvasLayer/MainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.85
+anchor_right = 0.9
+anchor_bottom = 0.93
+theme = SubResource("Theme_7asm0")
+text = "Kilépés"
+
 [node name="Config" type="Button" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = -1
