@@ -2,8 +2,18 @@ using Godot;
 using System;
 
 public partial class PopMenu : Control {
-    public string Action;
-    public InputEventKey Key;
+    public string Action {
+        get => _actionLabel.Text;
+        set => _actionLabel.Text = value;
+    }
+    public InputEventKey Key {
+        get => _key;
+        set { 
+            _key = value;
+            _inputLabel.Text = _key.Keycode.ToString();
+        }
+    }
+    private InputEventKey _key = null;
     private Label _actionLabel;
     private Label _inputLabel;
     private Control _popMenu;
@@ -18,18 +28,11 @@ public partial class PopMenu : Control {
          _popMenu = GetNode<Control>(".");
 
          okButton.Pressed += () => ControlMenu.Instance.Ok_Pressed(Key);
-         _popMenu.VisibilityChanged += Visibility_Changed;
     }
 
     public override void _Input(InputEvent @event) {
         if (@event is InputEventKey key) {
             Key = key;
-            _inputLabel.Text = Key.Keycode.ToString();
         }
-    }
-
-    public void Visibility_Changed() {
-        _actionLabel.Text = Action;
-        _inputLabel.Text = Key.Keycode.ToString();
     }
 }
