@@ -55,6 +55,4 @@ public partial class Menu : Control {
         _configMenu.Visible = false;
         Visible = true;
     }
-
-
 }
