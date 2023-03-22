@@ -40,10 +40,12 @@ public partial class ControlMenu : Control {
         PopMenu.Instance.Action = _action;
         PopMenu.Instance.Key = EventKey(_action);
         _popup.Visible = true;
+        _okButton.Disabled = true;
     }
 
     public void PopOk_Pressed(InputEventKey input) {
         _popup.Visible = false;
+        _okButton.Disabled = false;
         InputMap.ActionEraseEvents(_action);
         InputMap.ActionAddEvent(_action, PopMenu.Instance.Key);
 
