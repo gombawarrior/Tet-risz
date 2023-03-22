@@ -27,7 +27,7 @@ public partial class PopMenu : Control {
          _inputLabel = GetNode<Label>("InputLabel");
          _popMenu = GetNode<Control>(".");
 
-         okButton.Pressed += () => ControlMenu.Instance.Ok_Pressed(Key);
+         okButton.Pressed += () => ControlMenu.Instance.PopOk_Pressed(Key);
     }
 
     public override void _Input(InputEvent @event) {

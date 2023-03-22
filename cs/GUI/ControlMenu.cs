@@ -38,7 +38,7 @@ public partial class ControlMenu : Control {
         _popup.Visible = true;
     }
 
-    public void Ok_Pressed(InputEventKey input) {
+    public void PopOk_Pressed(InputEventKey input) {
         _popup.Visible = false;
         InputMap.ActionEraseEvents(_action);
         InputMap.ActionAddEvent(_action, PopMenu.Instance.Key);
