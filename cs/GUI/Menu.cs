@@ -19,7 +19,6 @@ public partial class Menu : Control {
         GetNode<Button>("Play").Pressed += () => GameField.Instance.Play_Pressed(_selected);
 
         GetNode<Button>("Config").Pressed += ConfigButton_Pressed;
-        GetNode<Button>("Leaderboard").Pressed += LeaderButton_Pressed;
 
         UpdateColors();
     }
@@ -50,10 +49,6 @@ public partial class Menu : Control {
     public void ConfigButton_Pressed() {
         Visible = false;
         _configMenu.Visible = true;
-    }
-
-    public void LeaderButton_Pressed() {
-
     }
 
     public void ConfigOkButton_Pressed() {
