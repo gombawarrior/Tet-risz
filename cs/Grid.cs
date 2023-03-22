@@ -21,10 +21,10 @@ public partial class Grid {
 	public bool IsEmpty(int row, int col) => IsInside(row, col) && _grid[row, col] == 0;
 
 	public bool IsFullRow(int row) => Enumerable.Range(0, Columns).All(col => _grid[row, col] != 0);
+	
+    public bool IsEmptyRow(int row) => Enumerable.Range(0, Columns).Sum(col => _grid[row, col]) == 0;
 
-	public bool IsEmptyRow(int row) => Enumerable.Range(0, Columns).All(col => _grid[row, col] == 0);
-
-	private void ClearRow(int row) {
+    private void ClearRow(int row) {
 		for (int col = 0;  col < Columns; col++) {
 			_grid[row, col] = 0;
 		}
