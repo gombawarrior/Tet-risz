@@ -8,7 +8,7 @@ public abstract class Shape {
     public int[,] CurrentShapeMatrix;
     public int CurrentRows => CurrentShapeMatrix.GetLength(0);
     public int CurrentCols => CurrentShapeMatrix.GetLength(1);
-    public Shape() {
+    protected Shape() {
         CurrentShapeMatrix = ShapeMatrix;
         Pos = StartPos;
     }

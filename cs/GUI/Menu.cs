@@ -24,7 +24,7 @@ public partial class Menu : Control {
         UpdateColors();
     }
 
-    void UpdateColors() {
+    private void UpdateColors() {
         bool selectionExists = false;
 
         foreach (Node n in GetChildren()) {
