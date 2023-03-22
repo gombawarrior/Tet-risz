@@ -1,5 +1,3 @@
-using Godot;
-
 public partial class Manager
 {
 	private Shape _activeShape;

@@ -376,7 +376,7 @@ anchor_left = 0.1
 anchor_top = 0.3
 anchor_right = 0.3
 anchor_bottom = 0.3
-text = "Left"
+text = "gomb"
 
 [node name="ButtonRight" type="Button" parent="CanvasLayer/ControlMenu"]
 layout_mode = 1
@@ -385,8 +385,7 @@ anchor_left = 0.1
 anchor_top = 0.375
 anchor_right = 0.3
 anchor_bottom = 0.375
-text = "Right
-"
+text = "gomb"
 
 [node name="ButtonDown" type="Button" parent="CanvasLayer/ControlMenu"]
 layout_mode = 1
@@ -395,7 +394,7 @@ anchor_left = 0.1
 anchor_top = 0.45
 anchor_right = 0.3
 anchor_bottom = 0.45
-text = "Down"
+text = "gomb"
 
 [node name="ButtonDrop" type="Button" parent="CanvasLayer/ControlMenu"]
 layout_mode = 1
@@ -405,7 +404,7 @@ anchor_top = 0.525
 anchor_right = 0.3
 anchor_bottom = 0.525
 grow_horizontal = 2
-text = "Space"
+text = "gomb"
 
 [node name="ButtonRotate" type="Button" parent="CanvasLayer/ControlMenu"]
 layout_mode = 1
@@ -414,7 +413,7 @@ anchor_left = 0.1
 anchor_top = 0.6
 anchor_right = 0.3
 anchor_bottom = 0.6
-text = "Up"
+text = "gomb"
 
 [node name="PopupMenu" type="Control" parent="CanvasLayer/ControlMenu"]
 visible = false

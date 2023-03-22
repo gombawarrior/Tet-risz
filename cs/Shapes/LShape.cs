@@ -5,6 +5,6 @@ public partial class LShape : Shape {
         {0, 0, 1},
         {1, 1, 1}
     };
-    protected override Vector2 StartPos => new Vector2(0, 3);
+    protected override Vector2 StartPos => new(0, 3);
     public override int Id => 6;
 }

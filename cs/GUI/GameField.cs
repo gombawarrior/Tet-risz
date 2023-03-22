@@ -130,7 +130,7 @@ public partial class GameField : ColorRect {
         }
     }
 
-	private void Draw(Manager gameManager) {
+	private new void Draw(Manager gameManager) {
 		DrawGrid(gameManager.Grid);
 		DrawShapes(gameManager.ActiveShape);
 		DrawNext(gameManager.Queue.NextShape);

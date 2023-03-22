@@ -33,7 +33,6 @@ public partial class Grid {
 	private void MoveRowDown(int row, int distance) {
 		for (int col = 0; col < Columns; col++) {
 			_grid[row + distance, col] = _grid[row, col];
-            //grid[row, col] = 0;
         }
 
 		ClearRow(row);

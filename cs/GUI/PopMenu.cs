@@ -1,26 +1,26 @@
 using Godot;
-using System;
 
 public partial class PopMenu : Control {
+    private InputEventKey _key;
+    private Label _actionLabel;
+    private Label _inputLabel;
+
+    public static PopMenu Instance;
     public string Action {
         get => _actionLabel.Text;
         set => _actionLabel.Text = value;
     }
     public InputEventKey Key {
         get => _key;
-        set { 
+        set {
             _key = value;
             _inputLabel.Text = _key.Keycode.ToString();
         }
     }
-    private InputEventKey _key = null;
-    private Label _actionLabel;
-    private Label _inputLabel;
-    public static PopMenu Instance;
 
     public override void _Ready() {
         Instance = this;
-        GD.Print("miva");
+
         Button okButton = GetNode<Button>("OK");
          _actionLabel = GetNode<Label>("ActionLabel");
          _inputLabel = GetNode<Label>("InputLabel");
