@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public partial class ControlMenu : Control {
     private string _action;
     private Control _popup;
+    private Button _okButton;
     private InputEventKey EventKey(string action) => (InputEventKey)InputMap.ActionGetEvents(action)[0];
     public static ControlMenu Instance;
 
@@ -12,6 +13,7 @@ public partial class ControlMenu : Control {
         Instance = this;
 
         _popup = GetNode<Control>("PopupMenu");
+        _okButton = GetNode<Button>("OK");
         
         foreach (Node n in GetChildren()) {
             if (n.Name.ToString()[0] == 'B' && n is Button btn) {
@@ -20,6 +22,8 @@ public partial class ControlMenu : Control {
                 btn.Pressed += () => ControlButton_Pressed(action);
             }
         }
+
+        _okButton.Pressed += Menu.Instance.ConfigOkButton_Pressed;
     }
 
     private void UpdateKeys() {

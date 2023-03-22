@@ -135,7 +135,7 @@ public partial class GameField : ColorRect {
 		DrawShapes(gameManager.ActiveShape);
 		DrawNext(gameManager.Queue.NextShape);
 		Label lineText = GetNode<Label>("Lines/LineText");
-		lineText.Text = $"LINES: {gameManager.Score:0000}";
+		lineText.Text = $"SOROK: {gameManager.Score:0000}";
 	}
 
 	private async Task GameLoop() {
@@ -175,12 +175,5 @@ public partial class GameField : ColorRect {
         _gameManager = new Manager();
 
         await GameLoop();
-    }
-    public void ConfigButton_Pressed() {
-
-    }
-
-    public void LeaderButton_Pressed() {
-
     }
 }

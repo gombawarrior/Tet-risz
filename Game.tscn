@@ -124,7 +124,7 @@ offset_left = 10.0
 offset_top = 125.0
 offset_right = 190.0
 offset_bottom = 155.0
-text = "NEXT"
+text = "KÖVETKEZŐ"
 label_settings = SubResource("LabelSettings_7x0a3")
 horizontal_alignment = 1
 
@@ -140,7 +140,6 @@ color = Color(0.294118, 0.0862745, 0.0862745, 1)
 follow_viewport_enabled = true
 
 [node name="MainMenu" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchor_left = 0.25
 anchor_top = 0.2
@@ -259,6 +258,7 @@ anchor_bottom = 0.26
 text = "Konfiguráció"
 
 [node name="ControlMenu" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchor_left = 0.25
 anchor_top = 0.2
@@ -306,7 +306,7 @@ text = "Irányítás módosítása"
 label_settings = SubResource("LabelSettings_8aidu")
 horizontal_alignment = 1
 
-[node name="Play" type="Button" parent="CanvasLayer/ControlMenu"]
+[node name="OK" type="Button" parent="CanvasLayer/ControlMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -314,8 +314,7 @@ anchor_top = 0.7
 anchor_right = 0.9
 anchor_bottom = 0.78
 theme = SubResource("Theme_7asm0")
-disabled = true
-text = "Játsz"
+text = "Ok"
 
 [node name="Label" type="Label" parent="CanvasLayer/ControlMenu"]
 layout_mode = 1

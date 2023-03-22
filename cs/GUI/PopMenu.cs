@@ -16,7 +16,6 @@ public partial class PopMenu : Control {
     private InputEventKey _key = null;
     private Label _actionLabel;
     private Label _inputLabel;
-    private Control _popMenu;
     public static PopMenu Instance;
 
     public override void _Ready() {
@@ -25,7 +24,6 @@ public partial class PopMenu : Control {
         Button okButton = GetNode<Button>("OK");
          _actionLabel = GetNode<Label>("ActionLabel");
          _inputLabel = GetNode<Label>("InputLabel");
-         _popMenu = GetNode<Control>(".");
 
          okButton.Pressed += () => ControlMenu.Instance.PopOk_Pressed(Key);
     }

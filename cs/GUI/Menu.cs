@@ -3,6 +3,7 @@ using Godot;
 public partial class Menu : Control {
     public static Menu Instance;
     private string _selected;
+    private Control _configMenu;
 
     public override void _Ready() {
         Instance = this;
@@ -13,10 +14,12 @@ public partial class Menu : Control {
             }
         }
 
+        _configMenu = GetNode<Control>("../ControlMenu");
+
         GetNode<Button>("Play").Pressed += () => GameField.Instance.Play_Pressed(_selected);
 
-        GetNode<Button>("Config").Pressed += GameField.Instance.ConfigButton_Pressed;
-        GetNode<Button>("Leaderboard").Pressed += GameField.Instance.LeaderButton_Pressed;
+        GetNode<Button>("Config").Pressed += ConfigButton_Pressed;
+        GetNode<Button>("Leaderboard").Pressed += LeaderButton_Pressed;
 
         UpdateColors();
     }
@@ -43,4 +46,20 @@ public partial class Menu : Control {
         _selected = start;
         UpdateColors();
     }
+
+    public void ConfigButton_Pressed() {
+        Visible = false;
+        _configMenu.Visible = true;
+    }
+
+    public void LeaderButton_Pressed() {
+
+    }
+
+    public void ConfigOkButton_Pressed() {
+        _configMenu.Visible = false;
+        Visible = true;
+    }
+
+
 }
