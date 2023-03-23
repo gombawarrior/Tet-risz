@@ -21,7 +21,8 @@ public partial class GameField : ColorRect {
     private Manager _gameManager = new();
     private Node2D _gameCanvas, _nextView;
     private ColorRect[,] _shapeControls, _nextShapeControls;
-    private Control _menu;
+    private Menu _menu;
+    private PauseMenu _pauseMenu;
     public static GameField Instance;
 
     public override void _Ready() {
@@ -29,39 +30,47 @@ public partial class GameField : ColorRect {
 
 		_gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
         _nextView = GetNode<Node2D>("Scoreboard/ColorRect/NextView");
-        _menu = GetNode<Control>("CanvasLayer/MainMenu");
+        _menu = GetNode<Menu>("CanvasLayer/MainMenu");
+        _pauseMenu = GetNode<PauseMenu>("CanvasLayer/PauseMenu");
 		_shapeControls = ConstructGameField(_gameManager.Grid);
         _nextShapeControls = ConstructNextShapeField();
-	}
+
+        _pauseMenu._Init();
+    }
 
     public override void _Process(double delta) {
-            if (!_gameRunning) return;
+        if (!_gameRunning) return;
 
-            _nextMove -= delta;
+        _nextMove -= delta;
 
-            if (_nextMove > 0) return;
-            bool rotatePressed = Input.IsActionJustPressed("Rotate");
-            bool leftPressed = Input.IsActionPressed("Left");
-            bool rightPressed = Input.IsActionPressed("Right");
-            bool downPressed = Input.IsActionPressed("Down");
-            bool dropPressed = Input.IsActionPressed("Drop");
+        if (_nextMove > 0) return;
+        bool rotatePressed = Input.IsActionJustPressed("Rotate");
+        bool leftPressed = Input.IsActionPressed("Left");
+        bool rightPressed = Input.IsActionPressed("Right");
+        bool downPressed = Input.IsActionPressed("Down");
+        bool dropPressed = Input.IsActionPressed("Drop");
+        bool pausePressed = Input.IsActionPressed("Pause");
 
-            if (rotatePressed) _gameManager.RotateShape();
-            if (leftPressed) _gameManager.MoveLeft();
-            if (rightPressed) _gameManager.MoveRight();
-            if (downPressed) _gameManager.MoveDown();
-            if (dropPressed) _gameManager.DropShape();
+        if (rotatePressed) _gameManager.RotateShape();
+        if (leftPressed) _gameManager.MoveLeft();
+        if (rightPressed) _gameManager.MoveRight();
+        if (downPressed) _gameManager.MoveDown();
+        if (dropPressed) _gameManager.DropShape();
 
-            if (rotatePressed || leftPressed || rightPressed || downPressed) {
-                _nextMove = 0.085;
-            }
-
-            if (dropPressed) {
-                _nextMove = 0.3;
-            }
-
-            Draw(_gameManager);
+        if (rotatePressed || leftPressed || rightPressed || downPressed) {
+            _nextMove = 0.085;
         }
+
+        if (dropPressed) {
+            _nextMove = 0.3;
+        }
+
+        Draw(_gameManager);
+
+        if (pausePressed) {
+            PauseInput_Pressed();
+        }
+    }
 
     private ColorRect[,] ConstructGameField(Grid grid) {
 		_shapeControls = new ColorRect[grid.Rows, grid.Columns];
@@ -143,7 +152,7 @@ public partial class GameField : ColorRect {
             for (int col = 0; col < shape.CurrentCols; col++) {
                 if (shape.CurrentShapeMatrix[row, col] == 1) {
                     Color ghostColor = _shapeColors[shape.Id];
-                    ghostColor.A = 0.4f;
+                    ghostColor.A = 0.25f;
                     _shapeControls[(int)shape.Pos.X + row + dropDistance, (int)shape.Pos.Y + col].Color = ghostColor;
                 }
             }
@@ -166,6 +175,8 @@ public partial class GameField : ColorRect {
             float delay = Math.Max(_minDelay, _maxDelay - (_gameManager.Score * _delayDecrease));
 
             await Task.Delay(TimeSpan.FromMilliseconds(delay));
+            if (!_gameRunning) continue;
+
 			_gameManager.MoveDown();
 			Draw(_gameManager);
         }
@@ -179,22 +190,36 @@ public partial class GameField : ColorRect {
             case "Weak":
                 _minDelay = 250;
                 _maxDelay = 1000;
-                _delayDecrease = 40;
+                _delayDecrease = 20;
                 break;
             case "Med":
                 _minDelay = 175;
                 _maxDelay = 850;
-                _delayDecrease = 50;
+                _delayDecrease = 30;
                 break;
             case "Hard":
                 _minDelay = 100;
                 _maxDelay = 650;
-                _delayDecrease = 70;
+                _delayDecrease = 50;
                 break;
         }
 
         _gameManager = new Manager();
 
         await GameLoop();
+    }
+
+    private void PauseInput_Pressed() {
+        _pauseMenu.Visible = true;
+        _gameRunning = false;
+    }
+
+    public void PauseContinue_Pressed() {
+        _pauseMenu.Visible = false;
+        _gameRunning = true;
+    }
+
+    public void PauseExit_Pressed() {
+        GetTree().Quit();
     }
 }
