@@ -88,6 +88,8 @@ public partial class Manager
 
         for (int row = 0; row < ActiveShape.CurrentRows; row++) {
             for (int col = 0; col < ActiveShape.CurrentCols; col++) {
+                if (ActiveShape.CurrentShapeMatrix[row, col] == 0) continue;
+
                 Vector2 pos = new Vector2(ActiveShape.Pos.X + row, ActiveShape.Pos.Y + col);
                 drop = Math.Min(drop, BlockDropDistance(pos));
             }
