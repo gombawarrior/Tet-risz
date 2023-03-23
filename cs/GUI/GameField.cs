@@ -110,7 +110,7 @@ public partial class GameField : ColorRect {
 		}
 	}
 
-	private void DrawShapes(Shape shape) {
+	private void DrawShape(Shape shape) {
 		for (int row = 0; row < shape.CurrentRows; row++) {
 			for (int col = 0; col < shape.CurrentCols; col++) {
 				if (shape.CurrentShapeMatrix[row, col] == 1) {
@@ -137,10 +137,24 @@ public partial class GameField : ColorRect {
         }
     }
 
+    private void DrawGhost(Shape shape) {
+        int dropDistance = _gameManager.ShapeDropDistance();
+        for (int row = 0; row < shape.CurrentRows; row++) {
+            for (int col = 0; col < shape.CurrentCols; col++) {
+                if (shape.CurrentShapeMatrix[row, col] == 1) {
+                    Color ghostColor = _shapeColors[shape.Id];
+                    ghostColor.A = 0.4f;
+                    _shapeControls[(int)shape.Pos.X + row + dropDistance, (int)shape.Pos.Y + col].Color = ghostColor;
+                }
+            }
+        }
+    }
+
 	private new void Draw(Manager gameManager) {
 		DrawGrid(gameManager.Grid);
-		DrawShapes(gameManager.ActiveShape);
+		DrawShape(gameManager.ActiveShape);
 		DrawNext(gameManager.Queue.NextShape);
+        DrawGhost(gameManager.ActiveShape);
 		Label lineText = GetNode<Label>("Lines/LineText");
 		lineText.Text = $"SOROK: {gameManager.Score:0000}";
 	}
