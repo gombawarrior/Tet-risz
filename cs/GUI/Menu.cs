@@ -3,7 +3,7 @@ using Godot;
 public partial class Menu : Control {
     public static Menu Instance;
     private string _selected;
-    private Control _configMenu;
+    private ControlMenu _configMenu;
 
     public override void _Ready() {
         Instance = this;
@@ -14,7 +14,7 @@ public partial class Menu : Control {
             }
         }
 
-        _configMenu = GetNode<Control>("../ControlMenu");
+        _configMenu = GetNode<ControlMenu>("../ControlMenu");
 
         GetNode<Button>("Play").Pressed += () => GameField.Instance.Play_Pressed(_selected);
 

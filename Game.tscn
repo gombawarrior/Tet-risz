@@ -420,6 +420,7 @@ anchor_bottom = 0.6
 text = "gomb"
 
 [node name="PopupMenu" type="Control" parent="CanvasLayer/ControlMenu"]
+visible = false
 layout_mode = 1
 anchor_left = 0.05
 anchor_top = 0.2

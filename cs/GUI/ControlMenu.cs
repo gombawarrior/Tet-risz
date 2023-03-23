@@ -2,7 +2,7 @@ using Godot;
 
 public partial class ControlMenu : Control {
     private string _action;
-    private Control _popup;
+    private PopMenu _popup;
     private Button _okButton;
     private InputEventKey EventKey(string action) => (InputEventKey)InputMap.ActionGetEvents(action)[0];
     public static ControlMenu Instance;
@@ -10,7 +10,7 @@ public partial class ControlMenu : Control {
     public override void _Ready() {
         Instance = this;
 
-        _popup = GetNode<Control>("PopupMenu");
+        _popup = GetNode<PopMenu>("PopupMenu");
         _okButton = GetNode<Button>("OK");
         
         foreach (Node n in GetChildren()) {
@@ -37,6 +37,7 @@ public partial class ControlMenu : Control {
         _action = action;
         PopMenu.Instance.Action = _action;
         PopMenu.Instance.Key = EventKey(_action);
+        FocusMode = FocusModeEnum.None;
         _popup.Visible = true;
         _okButton.Disabled = true;
     }
@@ -44,6 +45,7 @@ public partial class ControlMenu : Control {
     public void PopOk_Pressed(InputEventKey input) {
         _popup.Visible = false;
         _okButton.Disabled = false;
+        FocusMode = FocusModeEnum.All;
         InputMap.ActionEraseEvents(_action);
         InputMap.ActionAddEvent(_action, PopMenu.Instance.Key);
 
