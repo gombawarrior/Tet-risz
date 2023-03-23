@@ -152,9 +152,9 @@ public partial class GameField : ColorRect {
 
 	private new void Draw(Manager gameManager) {
 		DrawGrid(gameManager.Grid);
-		DrawShape(gameManager.ActiveShape);
-		DrawNext(gameManager.Queue.NextShape);
         DrawGhost(gameManager.ActiveShape);
+        DrawShape(gameManager.ActiveShape);
+		DrawNext(gameManager.Queue.NextShape);
 		Label lineText = GetNode<Label>("Lines/LineText");
 		lineText.Text = $"SOROK: {gameManager.Score:0000}";
 	}
