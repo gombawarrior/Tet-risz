@@ -1,7 +1,7 @@
 using Godot;
 using Tetrisz;
 
-public partial class LShape : Shape {
+public class LShape : Shape {
     protected override int[,] ShapeMatrix => new int[2, 3] {
         {0, 0, 1},
         {1, 1, 1}
