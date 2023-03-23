@@ -1,5 +1,6 @@
 using System.Linq;
 
+namespace Tetrisz;
 public partial class Grid {
 	public int Rows { get; }
 	public int Columns { get; }

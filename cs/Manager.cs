@@ -1,3 +1,5 @@
+namespace Tetrisz;
+
 public partial class Manager
 {
 	private Shape _activeShape;
@@ -6,7 +8,15 @@ public partial class Manager
 		set {
 			_activeShape = value;
 			_activeShape.Reset();
-		}
+
+            for (int i = 0; i < 2; i++) {
+                _activeShape.Move(1, 0);
+
+                if (!IsLegal()) {
+                    _activeShape.Move(-1, 0);
+                }
+            }
+        }
 	}
 	public Grid Grid;
 	public Queue Queue;

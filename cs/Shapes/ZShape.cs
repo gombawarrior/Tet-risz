@@ -1,4 +1,5 @@
 using Godot;
+using Tetrisz;
 
 public partial class ZShape : Shape {
     protected override int[,] ShapeMatrix => new int[2, 3] {

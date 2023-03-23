@@ -1,5 +1,7 @@
 using System;
 
+namespace Tetrisz;
+
 public partial class Queue {
     private readonly Random _rand = new();
     public Shape[] Shapes = { 

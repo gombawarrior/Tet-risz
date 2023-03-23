@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Threading.Tasks;
+using Tetrisz;
 
 public partial class GameField : ColorRect {
     private Color[] _shapeColors = {

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace Tetrisz;
+
 public abstract class Shape {
     protected abstract int[,] ShapeMatrix { get; }
     protected abstract Vector2 StartPos { get; }
