@@ -44,14 +44,20 @@ public partial class GameField : ColorRect {
             bool leftPressed = Input.IsActionPressed("Left");
             bool rightPressed = Input.IsActionPressed("Right");
             bool downPressed = Input.IsActionPressed("Down");
+            bool dropPressed = Input.IsActionPressed("Drop");
 
             if (rotatePressed) _gameManager.RotateShape();
             if (leftPressed) _gameManager.MoveLeft();
             if (rightPressed) _gameManager.MoveRight();
             if (downPressed) _gameManager.MoveDown();
+            if (dropPressed) _gameManager.DropShape();
 
             if (rotatePressed || leftPressed || rightPressed || downPressed) {
                 _nextMove = 0.085;
+            }
+
+            if (dropPressed) {
+                _nextMove = 0.3;
             }
 
             Draw(_gameManager);

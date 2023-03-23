@@ -1,3 +1,6 @@
+using System;
+using Godot;
+
 namespace Tetrisz;
 
 public partial class Manager
@@ -66,11 +69,39 @@ public partial class Manager
 		ActiveShape.Move(1, 0);
 		if (!IsLegal()) {
 			ActiveShape.Move(-1, 0);
-			PlaceShapes();
+			PlaceShape();
 		}
 	}
 
-	private void PlaceShapes() {
+    private int BlockDropDistance(Vector2 pos) {
+        int drop = 0;
+
+        while (Grid.IsEmpty((int)pos.X + drop + 1, (int)pos.Y)) {
+            drop++;
+        }
+
+		return drop;
+    }
+
+    public int ShapeDropDistance() {
+        int drop = Grid.Rows;
+
+        for (int row = 0; row < ActiveShape.CurrentRows; row++) {
+            for (int col = 0; col < ActiveShape.CurrentCols; col++) {
+                Vector2 pos = new Vector2(ActiveShape.Pos.X + row, ActiveShape.Pos.Y + col);
+                drop = Math.Min(drop, BlockDropDistance(pos));
+            }
+        }
+
+		return drop;
+    }
+
+    public void DropShape() {
+		ActiveShape.Move(ShapeDropDistance(), 0);
+		PlaceShape();
+    }
+
+	private void PlaceShape() {
 		for (int row = 0; row < ActiveShape.CurrentRows; row++) {
 			for (int col = 0; col < ActiveShape.CurrentCols; col++) {
 				if (ActiveShape.CurrentShapeMatrix[row, col] != 1) continue;
