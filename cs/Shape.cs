@@ -22,6 +22,7 @@ public abstract class Shape {
                 newShapeMatrix[row, col] = CurrentShapeMatrix[CurrentRows - col - 1, row];
             }
         }
+
         CurrentShapeMatrix = newShapeMatrix;
     }
 
@@ -32,6 +33,7 @@ public abstract class Shape {
                 newShapeMatrix[row, col] = CurrentShapeMatrix[col, CurrentCols - row - 1];
             }
         }
+
         CurrentShapeMatrix = newShapeMatrix;
     }
 

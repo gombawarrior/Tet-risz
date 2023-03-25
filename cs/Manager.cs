@@ -3,8 +3,7 @@ using Godot;
 
 namespace Tetrisz;
 
-public partial class Manager
-{
+public partial class Manager {
 	private Shape _activeShape;
 	public Shape ActiveShape {
 		get => _activeShape;
