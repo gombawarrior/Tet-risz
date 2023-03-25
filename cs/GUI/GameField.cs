@@ -30,8 +30,8 @@ public partial class GameField : ColorRect {
 
 		_gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
         _nextView = GetNode<Node2D>("Scoreboard/ColorRect/NextView");
-        _menu = GetNode<Menu>("CanvasLayer/MainMenu");
-        _pauseMenu = GetNode<PauseMenu>("CanvasLayer/PauseMenu");
+        _menu = GetNode<Menu>("Menus/MainMenu");
+        _pauseMenu = GetNode<PauseMenu>("Menus/PauseMenu");
 		_shapeControls = ConstructGameField(_gameManager.Grid);
         _nextShapeControls = ConstructNextShapeField();
 
@@ -217,6 +217,12 @@ public partial class GameField : ColorRect {
     public void PauseContinue_Pressed() {
         _pauseMenu.Visible = false;
         _gameRunning = true;
+    }
+
+    public void PauseReplay_Pressed() {
+        _pauseMenu.Visible = false;
+        _gameRunning = false;
+        _menu.Visible = true;
     }
 
     public void PauseExit_Pressed() {
