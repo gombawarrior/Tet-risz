@@ -171,15 +171,19 @@ public partial class GameField : ColorRect {
 	private async Task GameLoop() {
 		Draw(_gameManager);
 
-		while (!_gameManager.IsGameOver) {
+		while (!_gameManager.IsGameOver && _gameRunning) {
             float delay = Math.Max(_minDelay, _maxDelay - (_gameManager.Score * _delayDecrease));
 
             await Task.Delay(TimeSpan.FromMilliseconds(delay));
+
             if (!_gameRunning) continue;
 
 			_gameManager.MoveDown();
 			Draw(_gameManager);
         }
+
+        if (!_gameManager.IsGameOver) return;
+
         _menu.Visible = true;
     }
 
@@ -214,9 +218,10 @@ public partial class GameField : ColorRect {
         _gameRunning = false;
     }
 
-    public void PauseContinue_Pressed() {
+    public async void PauseContinue_Pressed() {
         _pauseMenu.Visible = false;
         _gameRunning = true;
+        await GameLoop();
     }
 
     public void PauseReplay_Pressed() {
