@@ -18,8 +18,8 @@ config/features=PackedStringArray("4.0", "C#")
 
 window/size/viewport_width=650
 window/size/viewport_height=1000
+window/handheld/orientation=1
 window/stretch/mode="viewport"
-window/stretch/aspect="ignore"
 
 [dotnet]
 
