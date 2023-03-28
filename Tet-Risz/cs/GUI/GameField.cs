@@ -93,7 +93,7 @@ public partial class GameField : ColorRect {
 
     private ColorRect[,] ConstructNextShapeField() {
         _nextShapeControls = new ColorRect[4, 4];
-        const int cellSize = 25;
+        const int cellSize = 20;
         const int padding = 0;
 
         for (int rows = 0; rows < 4; rows++) {

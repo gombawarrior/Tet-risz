@@ -120,7 +120,7 @@ offset_bottom = 120.0
 color = Color(1, 0.803922, 1, 1)
 
 [node name="NextView" type="Node2D" parent="Scoreboard/ColorRect"]
-position = Vector2(55, 30)
+position = Vector2(55, 25)
 
 [node name="Label" type="Label" parent="Scoreboard"]
 layout_mode = 0
