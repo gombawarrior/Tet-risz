@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 namespace Tetrisz;
@@ -20,8 +19,8 @@ public partial class Manager {
             }
         }
 	}
-	public Grid Grid;
-	public Queue Queue;
+	public Grid Grid { get; }
+	public Queue Queue { get; }
 	public bool IsGameOver => !(Grid.IsEmptyRow(0) && Grid.IsEmptyRow(1));
 	public int Score { get; private set; }
 
@@ -40,6 +39,7 @@ public partial class Manager {
 				if (!Grid.IsEmpty((int)ActiveShape.Pos.X + row, (int)ActiveShape.Pos.Y + col)) return false;
 			}
 		}
+
 		return true;
 	}
 
@@ -90,7 +90,7 @@ public partial class Manager {
                 if (ActiveShape.CurrentShapeMatrix[row, col] == 0) continue;
 
                 Vector2 pos = new Vector2(ActiveShape.Pos.X + row, ActiveShape.Pos.Y + col);
-                drop = Math.Min(drop, BlockDropDistance(pos));
+                drop = System.Math.Min(drop, BlockDropDistance(pos));
             }
         }
 

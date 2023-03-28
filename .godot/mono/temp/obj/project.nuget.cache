@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "un0HEjPJ5SgOWA5HstFyi0xiyRFfKNXOe79lLbk/gQPOp5g0Z6mNsTvkohCtC1Z9t3sNabQ/fMJf2eMqyjxltQ==",
+  "success": true,
+  "projectFilePath": "D:\\Zárodolog\\Tet-risz\\Tetrisz.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tarcz\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godot.sourcegenerators\\4.0.0\\godot.sourcegenerators.4.0.0.nupkg.sha512",
+    "C:\\Users\\tarcz\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharp\\4.0.0\\godotsharp.4.0.0.nupkg.sha512",
+    "C:\\Users\\tarcz\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder\\godotsharpeditor\\4.0.0\\godotsharpeditor.4.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
