@@ -241,7 +241,7 @@ anchor_right = 0.9
 anchor_bottom = 0.78
 theme = SubResource("Theme_7asm0")
 disabled = true
-text = "Játsz"
+text = "Játssz"
 
 [node name="Exit" type="Button" parent="Menus/MainMenu"]
 layout_mode = 1
