@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="Tetrisz"
+config/description="Tet-Risz by TarczalDJ"
 run/main_scene="res://Game.tscn"
 config/features=PackedStringArray("4.0", "C#")
+boot_splash/bg_color=Color(0.192157, 0.121569, 0.0784314, 1)
+boot_splash/image="res://assets/T2.png"
+boot_splash/fullsize=false
+config/icon="res://assets/T.png"
+boot_splash/minimum_display_time=1000
 
 [display]
 
