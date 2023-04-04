@@ -75,14 +75,13 @@ public partial class GameField : ColorRect {
     private ColorRect[,] ConstructGameField(Grid grid) {
 		_shapeControls = new ColorRect[grid.Rows, grid.Columns];
 		const int cellSize = 40;
-		const int padding = 0;
 
 		for (int rows = 0; rows < grid.Rows; rows++) {
 			for (int cols = 0;  cols < grid.Columns; cols++) {
 				ColorRect shapeControl = new();
 				shapeControl.Color = _shapeColors[0];
 				shapeControl.Size = new Vector2(cellSize, cellSize);
-				shapeControl.Position = new Vector2(cols * cellSize + padding, (rows - 2) * cellSize + padding);
+				shapeControl.Position = new Vector2(cols * cellSize, (rows - 2) * cellSize);
 				_gameCanvas.AddChild(shapeControl);
 				_shapeControls[rows, cols] = shapeControl;
 			}
@@ -94,14 +93,13 @@ public partial class GameField : ColorRect {
     private ColorRect[,] ConstructNextShapeField() {
         _nextShapeControls = new ColorRect[4, 4];
         const int cellSize = 20;
-        const int padding = 0;
 
         for (int rows = 0; rows < 4; rows++) {
             for (int cols = 0; cols < 4; cols++) {
                 ColorRect shapeControl = new();
                 shapeControl.Color = _shapeColors[0];
                 shapeControl.Size = new Vector2(cellSize, cellSize);
-                shapeControl.Position = new Vector2(cols * cellSize + padding, rows * cellSize + padding);
+                shapeControl.Position = new Vector2(cols * cellSize, rows * cellSize);
                 _nextView.AddChild(shapeControl);
                 _nextShapeControls[rows, cols] = shapeControl;
             }
