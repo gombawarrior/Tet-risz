@@ -21,6 +21,7 @@ public partial class GameField : ColorRect {
     private Manager _gameManager = new();
     private Node2D _gameCanvas, _nextView;
     private ColorRect[,] _shapeControls, _nextShapeControls;
+    private Label _lineText;
     private Menu _menu;
     private PauseMenu _pauseMenu;
     public static GameField Instance;
@@ -28,7 +29,8 @@ public partial class GameField : ColorRect {
     public override void _Ready() {
         Instance = this;
 
-		_gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
+        _lineText = GetNode<Label>("Lines/LineText");
+        _gameCanvas = GetNode<Node2D>("MainField/GameCanvas");
         _nextView = GetNode<Node2D>("Scoreboard/ColorRect/NextView");
         _menu = GetNode<Menu>("Menus/MainMenu");
         _pauseMenu = GetNode<PauseMenu>("Menus/PauseMenu");
@@ -162,14 +164,12 @@ public partial class GameField : ColorRect {
         DrawGhost(gameManager.ActiveShape);
         DrawShape(gameManager.ActiveShape);
 		DrawNext(gameManager.Queue.NextShape);
-		Label lineText = GetNode<Label>("Lines/LineText");
-		lineText.Text = $"SOROK: {gameManager.Score:0000}";
+		_lineText.Text = $"SOROK: {gameManager.Score:0000}";
 	}
 
 	private async Task GameLoop() {
-		Draw(_gameManager);
-
-		while (!_gameManager.IsGameOver && _gameRunning) {
+        do {
+            Draw(_gameManager);
             float delay = Math.Max(_minDelay, _maxDelay - (_gameManager.Score * _delayDecrease));
 
             await Task.Delay(TimeSpan.FromMilliseconds(delay));
@@ -177,8 +177,7 @@ public partial class GameField : ColorRect {
             if (!_gameRunning) continue;
 
 			_gameManager.MoveDown();
-			Draw(_gameManager);
-        }
+        } while (!_gameManager.IsGameOver && _gameRunning);
 
         if (!_gameManager.IsGameOver) return;
 
