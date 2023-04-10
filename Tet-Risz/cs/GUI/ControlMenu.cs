@@ -51,4 +51,9 @@ public partial class ControlMenu : Control {
 
         UpdateKeys();
     }
+
+    public void PopCancel() {
+        _popup.Visible = false;
+        _okButton.Disabled = false;
+    }
 }
