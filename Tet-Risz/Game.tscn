@@ -144,7 +144,6 @@ color = Color(0.294118, 0.0862745, 0.0862745, 1)
 follow_viewport_enabled = true
 
 [node name="MainMenu" type="Control" parent="Menus"]
-visible = false
 layout_mode = 3
 anchor_left = 0.25
 anchor_top = 0.2
@@ -264,6 +263,7 @@ anchor_bottom = 0.26
 text = "Konfiguráció"
 
 [node name="ControlMenu" type="Control" parent="Menus"]
+visible = false
 layout_mode = 3
 anchor_left = 0.25
 anchor_top = 0.2
@@ -430,6 +430,7 @@ action_mode = 0
 text = "gomb"
 
 [node name="PopupMenu" type="Control" parent="Menus/ControlMenu"]
+visible = false
 layout_mode = 1
 anchor_left = 0.05
 anchor_top = 0.2
@@ -468,7 +469,7 @@ text = "Gomb"
 label_settings = SubResource("LabelSettings_2ittr")
 horizontal_alignment = 1
 
-[node name="CancelButton" type="Button" parent="Menus/ControlMenu/PopupMenu"]
+[node name="Cancel" type="Button" parent="Menus/ControlMenu/PopupMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.15
