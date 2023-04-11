@@ -23,13 +23,11 @@ public partial class PopMenu : Control {
         }
     }
 
-    public override void _Ready() {
-        Instance = this;
-
+    public void _Init() {
         Button okButton = GetNode<Button>("OK");
         Button cancelButton = GetNode<Button>("Cancel");
-         _actionLabel = GetNode<Label>("ActionLabel");
-         _inputLabel = GetNode<Label>("InputLabel");
+        _actionLabel = GetNode<Label>("ActionLabel");
+        _inputLabel = GetNode<Label>("InputLabel");
 
         okButton.Pressed += () => ControlMenu.Instance.PopOk_Pressed(Key);
         cancelButton.Pressed += ControlMenu.Instance.PopCancel;

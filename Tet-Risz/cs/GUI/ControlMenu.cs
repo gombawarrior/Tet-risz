@@ -22,6 +22,7 @@ public partial class ControlMenu : Control {
         }
 
         _okButton.Pressed += Menu.Instance.ConfigOkButton_Pressed;
+        _popup._Init();
     }
 
     private void UpdateKeys() {
@@ -35,8 +36,8 @@ public partial class ControlMenu : Control {
 
     private void ControlButton_Pressed(string action) {
         _action = action;
-        PopMenu.Instance.Action = _action;
-        PopMenu.Instance.Key = EventKey(_action);
+        _popup.Action = _action;
+        _popup.Key = EventKey(_action);
         FocusMode = FocusModeEnum.None;
         _popup.Visible = true;
         _okButton.Disabled = true;
@@ -47,7 +48,7 @@ public partial class ControlMenu : Control {
         _okButton.Disabled = false;
         FocusMode = FocusModeEnum.All;
         InputMap.ActionEraseEvents(_action);
-        InputMap.ActionAddEvent(_action, PopMenu.Instance.Key);
+        InputMap.ActionAddEvent(_action, _popup.Key);
 
         UpdateKeys();
     }
