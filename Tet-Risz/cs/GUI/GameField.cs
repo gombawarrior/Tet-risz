@@ -15,7 +15,7 @@ public partial class GameField : ColorRect {
 		new("purple")
 	};
 
-    private bool _gameRunning;
+    private bool _gameRunning, _isHard = false;
     private float _minDelay, _maxDelay, _delayDecrease;
     private double _nextMove = 0.085;
     private Manager _gameManager = new();
@@ -161,7 +161,7 @@ public partial class GameField : ColorRect {
 
 	private new void Draw(Manager gameManager) {
 		DrawGrid(gameManager.Grid);
-        DrawGhost(gameManager.ActiveShape);
+        if (!_isHard) DrawGhost(gameManager.ActiveShape);
         DrawShape(gameManager.ActiveShape);
 		DrawNext(gameManager.Queue.NextShape);
 		_lineText.Text = $"SOROK: {gameManager.Score:0000}";
@@ -202,6 +202,7 @@ public partial class GameField : ColorRect {
                 _minDelay = 100;
                 _maxDelay = 650;
                 _delayDecrease = 50;
+                _isHard = true;
                 break;
         }
 
