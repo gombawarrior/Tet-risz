@@ -39,7 +39,7 @@ public partial class PopMenu : Control {
         if (@event is InputEventKey key) {
             InputEventKey pauseKey = (InputEventKey)InputMap.ActionGetEvents("Pause")[0];
 
-            //if (_keyList.Contains(keyName)) return;
+            //if (_keyList.Contains(key.Keycode.ToString())) return;
             if (key.Keycode == pauseKey.Keycode) ControlMenu.Instance.PopCancel();
 
             Key = key;
