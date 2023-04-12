@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static System.Collections.Specialized.BitVector32;
 
 public partial class PopMenu : Control {
     private InputEventKey _key;
@@ -31,7 +32,7 @@ public partial class PopMenu : Control {
 
         okButton.Pressed += () => ControlMenu.Instance.PopOk_Pressed(Key);
         cancelButton.Pressed += ControlMenu.Instance.PopCancel;
-        //_keyList = GetKeyList();
+        _keyList = GetKeyList();
     }
 
     public override void _Input(InputEvent @event) {
@@ -39,8 +40,8 @@ public partial class PopMenu : Control {
         if (@event is InputEventKey key) {
             InputEventKey pauseKey = (InputEventKey)InputMap.ActionGetEvents("Pause")[0];
 
-            //if (_keyList.Contains(key.Keycode.ToString())) return;
             if (key.Keycode == pauseKey.Keycode) ControlMenu.Instance.PopCancel();
+            if (_keyList.Contains(key.Keycode.ToString())) return;
 
             Key = key;
         }
@@ -48,8 +49,9 @@ public partial class PopMenu : Control {
 
     private List<string> GetKeyList() {
         List<string> list = new();
-        foreach (var e in InputMap.GetActions()) {
-            list.Add(EventKey(e).Keycode.ToString());
+        var actions = InputMap.GetActions().ToList();
+        for (int i = 76; i < actions.Count; i++) {
+            list.Add(EventKey(actions[i]).Keycode.ToString());
         }
 
         return list;
