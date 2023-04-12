@@ -37,12 +37,10 @@ public partial class PopMenu : Control {
     public override void _Input(InputEvent @event) {
         if (Visible == false) return;
         if (@event is InputEventKey key) {
-            string keyName = key.Keycode.ToString();
-            var pause = (InputEventKey)InputMap.ActionGetEvents("Pause")[0];
-            var pauseKey = pause.Keycode.ToString();
+            InputEventKey pauseKey = (InputEventKey)InputMap.ActionGetEvents("Pause")[0];
 
             //if (_keyList.Contains(keyName)) return;
-            if (keyName == pauseKey) ControlMenu.Instance.PopCancel();
+            if (key.Keycode == pauseKey.Keycode) ControlMenu.Instance.PopCancel();
 
             Key = key;
         }
