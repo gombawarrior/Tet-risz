@@ -15,7 +15,7 @@ public partial class GameField : ColorRect {
 		new("purple")
 	};
 
-	private bool _gameRunning, _isHard = false;
+	private bool _isInMainLoop, _gameRunning, _isHard = false;
 	private float _minDelay, _maxDelay, _delayDecrease;
 	private double _nextMove = 0.085;
 	private Manager _gameManager = new();
@@ -169,6 +169,7 @@ public partial class GameField : ColorRect {
 
 	private async Task GameLoop() {
 		do {
+			_isInMainLoop = true;
 			Draw(_gameManager);
 			float delay = Math.Max(_minDelay, _maxDelay - (_gameManager.Score * _delayDecrease));
 
@@ -178,6 +179,8 @@ public partial class GameField : ColorRect {
 
 			_gameManager.MoveDown();
 		} while (!_gameManager.IsGameOver && _gameRunning);
+
+		_isInMainLoop = false;
 
 		if (!_gameManager.IsGameOver) return;
 
@@ -208,7 +211,7 @@ public partial class GameField : ColorRect {
 
 		_gameManager = new Manager();
 
-		await GameLoop();
+        if (!_isInMainLoop) await GameLoop();
 	}
 
 	private void PauseInput_Pressed() {
@@ -219,7 +222,7 @@ public partial class GameField : ColorRect {
 	public async void PauseContinue_Pressed() {
 		_pauseMenu.Visible = false;
 		_gameRunning = true;
-		await GameLoop();
+		if (!_isInMainLoop) await GameLoop();
 	}
 
 	public void PauseReplay_Pressed() {
