@@ -15,7 +15,7 @@ public partial class GameField : ColorRect {
 		new("purple")
 	};
 
-	private bool _isInMainLoop, _gameRunning, _isHard = false;
+	private bool _isInMainLoop, _gameRunning, _isPaused = false, _isHard = false;
 	private float _minDelay, _maxDelay, _delayDecrease;
 	private double _nextMove = 0.085;
 	private Manager _gameManager = new();
@@ -41,7 +41,15 @@ public partial class GameField : ColorRect {
 	}
 
 	public override void _Process(double delta) {
-		if (!_gameRunning) return;
+        bool pausePressed = Input.IsActionJustPressed("Pause");
+
+        if (pausePressed && _isPaused) {
+            PauseContinue_Pressed();
+            _isPaused = false;
+            return;
+        }
+
+        if (!_gameRunning) return;
 
 		_nextMove -= delta;
 
@@ -51,7 +59,6 @@ public partial class GameField : ColorRect {
 		bool rightPressed = Input.IsActionPressed("Right");
 		bool downPressed = Input.IsActionPressed("Down");
 		bool dropPressed = Input.IsActionPressed("Drop");
-		bool pausePressed = Input.IsActionPressed("Pause");
 
 		if (rotatePressed) _gameManager.RotateShape();
 		if (leftPressed) _gameManager.MoveLeft();
@@ -69,8 +76,10 @@ public partial class GameField : ColorRect {
 
 		Draw(_gameManager);
 
-		if (pausePressed) {
+		if (pausePressed && !_isPaused) {
 			PauseInput_Pressed();
+			_isPaused = true;
+			return;
 		}
 	}
 
