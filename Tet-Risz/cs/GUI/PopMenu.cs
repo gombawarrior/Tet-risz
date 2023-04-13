@@ -5,7 +5,7 @@ public partial class PopMenu : Control {
     private InputEventKey _key;
     private Label _actionLabel;
     private Label _inputLabel;
-    private List<string> _keyList;
+    public List<string> KeyList;
     private InputEventKey EventKey(string action) => (InputEventKey)InputMap.ActionGetEvents(action)[0];
 
     public static PopMenu Instance;
@@ -29,7 +29,7 @@ public partial class PopMenu : Control {
 
         okButton.Pressed += () => ControlMenu.Instance.PopOk_Pressed(Key);
         cancelButton.Pressed += ControlMenu.Instance.PopCancel;
-        _keyList = GetKeyList();
+        KeyList = GetKeyList();
     }
 
     public override void _Input(InputEvent @event) {
@@ -38,13 +38,13 @@ public partial class PopMenu : Control {
             InputEventKey pauseKey = (InputEventKey)InputMap.ActionGetEvents("Pause")[0];
 
             if (key.Keycode == pauseKey.Keycode) ControlMenu.Instance.PopCancel();
-            if (_keyList.Contains(key.Keycode.ToString())) return;
+            if (KeyList.Contains(key.Keycode.ToString())) return;
 
             Key = key;
         }
     }
 
-    private List<string> GetKeyList() {
+    public List<string> GetKeyList() {
         List<string> list = new();
         var actions = InputMap.GetActions();
         for (int i = 76; i < actions.Count; i++) {

@@ -49,6 +49,7 @@ public partial class ControlMenu : Control {
         FocusMode = FocusModeEnum.All;
         InputMap.ActionEraseEvents(_action);
         InputMap.ActionAddEvent(_action, _popup.Key);
+        _popup.KeyList = _popup.GetKeyList();
 
         UpdateKeys();
     }
