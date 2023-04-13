@@ -1,8 +1,5 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using static System.Collections.Specialized.BitVector32;
 
 public partial class PopMenu : Control {
     private InputEventKey _key;
@@ -49,7 +46,7 @@ public partial class PopMenu : Control {
 
     private List<string> GetKeyList() {
         List<string> list = new();
-        var actions = InputMap.GetActions().ToList();
+        var actions = InputMap.GetActions();
         for (int i = 76; i < actions.Count; i++) {
             list.Add(EventKey(actions[i]).Keycode.ToString());
         }
