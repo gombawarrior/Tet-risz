@@ -1,4 +1,4 @@
-#Tet-Risz#
+# Tet-Risz
 
 Technikusi projektmunkám
 
